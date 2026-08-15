@@ -156,7 +156,7 @@ export function ContactFooter() {
               </div>
 
               <a
-                href="https://t.me/mhgh0st"
+                href="https://t.me/MHgh0st_13"
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="interactive"
@@ -188,7 +188,7 @@ export function ContactFooter() {
               </div>
 
               <a
-                href="https://instagram.com/mhgh0st"
+                href="https://instagram.com/mhgh0st_13"
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="interactive"
