@@ -14,6 +14,11 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       return;
     }
 
+    const isTouchDevice =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -21,7 +26,8 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 2.0,
+      touchMultiplier: isTouchDevice ? 1.0 : 1.5,
+      syncTouch: false,
     });
 
     // Synchronize Lenis scroll with GSAP ScrollTrigger
@@ -45,8 +51,8 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       if (targetElement) {
         e.preventDefault();
         lenis.scrollTo(targetElement as HTMLElement, {
-          offset: -20, // Offset for sticky navbar clearance
-          duration: 1.2,
+          offset: -72, // Clears 56px sticky header + safe margin
+          duration: 1.0,
         });
       }
     };

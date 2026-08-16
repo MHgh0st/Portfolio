@@ -1,0 +1,568 @@
+{
+  "Metadata": {
+    "title": "Mohammad Hossein Gholami (MHgh0st) // Senior Frontend Engineer",
+    "description": "Senior Frontend Engineering portfolio of Mohammad Hossein Gholami. Building interactive graph engines, Swiss-inspired digital typography, and high-performance web systems.",
+    "keywords": "Mohammad Hossein Gholami, Senior Frontend Engineer, Software Architect, Lead Developer, Next.js, React, Data Visualization, Graph Processing, Swiss Typography",
+    "author": "Mohammad Hossein Gholami",
+    "ogSiteName": "Mohammad Hossein Gholami // MHGH0ST"
+  },
+  "LanguageSwitcher": {
+    "ariaLabel": "Switch Language",
+    "persian": "فارسی",
+    "english": "English",
+    "faShort": "FA",
+    "enShort": "EN"
+  },
+  "ThemeToggle": {
+    "ariaLabel": "Toggle theme mode",
+    "label": "THEME",
+    "light": "Light",
+    "dark": "Dark",
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
+  },
+  "Common": {
+    "location": "Qom",
+    "country": "Iran",
+    "time": "TIME:",
+    "statusAvailable": "OPEN TO SENIOR ROLES",
+    "statusAvailableShort": "AVAILABLE FOR WORK",
+    "brandName": "M.H. GHOLAMI",
+    "brandTag": "// MHGH0ST",
+    "domain": "MHGH0ST.DEV",
+    "contact": "CONTACT",
+    "close": "Close",
+    "zoom": "Enlarge",
+    "directLink": "Direct view or download asset",
+    "closeEsc": "Close inspector (Esc)",
+    "lightboxDismiss": "Click anywhere or close icon to dismiss",
+    "jumpToTop": "Scroll to top",
+    "jumpToBottom": "Scroll to bottom",
+    "drag": "DRAG",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide"
+  },
+  "HeaderNav": {
+    "locationLabel": "LOC: QOM, IRAN",
+    "timeLabel": "TIME:",
+    "statusBadge": "OPEN TO SENIOR ROLES",
+    "contactCta": "CONTACT",
+    "quickAccessTitle": "QUICK SECTION JUMP",
+    "mobileLocation": "LOC: QOM, IRAN",
+    "mobileCtaButton": "START A CONVERSATION",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close menu",
+    "nav": {
+      "projects": "PROJECTS",
+      "projectsSub": "Repositories & source code",
+      "caseStudies": "CASE STUDIES",
+      "caseStudiesSub": "Salma & GraphNext deep-dives",
+      "whatIDo": "ENGINEERING",
+      "whatIDoSub": "Pillars & verified evidence",
+      "aboutPhilosophy": "PHILOSOPHY",
+      "aboutPhilosophySub": "Mindset, craft & values",
+      "experienceStack": "TECH STACK",
+      "experienceStackSub": "Tools & practical workflow"
+    }
+  },
+  "Hero": {
+    "bgText": "MHGH0ST // CREATIVE DEVELOPER // FRONTEND ARCHITECT",
+    "eyebrow": "PRODUCT DESIGNER & CREATIVE TECHNOLOGIST",
+    "firstName": "MOHAMMAD HOSSEIN",
+    "lastName": "GHOLAMI",
+    "titleStamp": "// SENIOR_FRONTEND_ARCHITECT",
+    "statement": "Engineering high-craft web systems with architectural scalability, precision performance, and distinct typographic character.",
+    "description": "Passionate about architecting fast, scalable frontend systems with an obsession for real-world performance and crafting interfaces that feel genuinely delightful to use.",
+    "ctaSelectedWork": "EXPLORE SELECTED WORK",
+    "ctaContact": "START A CONVERSATION",
+    "portraitTitle": "Mohammad Hossein Gholami // PORTRAIT_REF_01",
+    "portraitAlt": "Mohammad Hossein Gholami",
+    "portraitTooltip": "Tap or click to view portrait in original full resolution",
+    "cornerLabel": "PORTRAIT_REF // 01",
+    "rawFrame": "[RAW_FRAME]",
+    "tagHandle": "@MHGH0ST",
+    "annotationTypography": "Set in Swiss-Editorial Monospace & Kalameh",
+    "annotationEdition": "EDITION 2026",
+    "scrollCue": "[SCROLL DOWN // SELECTED WORK BELOW]",
+    "sectionId": "MHGH0ST.DEV // SECTION_01"
+  },
+  "CaseStudies": {
+    "eyebrow": "[SECTION 01 // SELECTED WORK & SOURCE CODE]",
+    "heading": "Flagship Projects & Production Architectures",
+    "stamp": "GITHUB_REPOSITORIES // VERIFIED_CODE",
+    "listHeader": "FEATURED REPOSITORIES:",
+    "listHint": "[SELECT A SYSTEM TO INSPECT]",
+    "statusSelected": "SELECTED",
+    "statusInspect": "INSPECT SPECS",
+    "tabs": {
+      "overview": "Overview & Impact",
+      "architecture": "Architecture & Stack",
+      "visuals": "System Previews"
+    },
+    "overviewHeading": "// CORE PURPOSE & OBJECTIVE",
+    "highlightsHeading": "// KEY HIGHLIGHTS & DELIVERABLES",
+    "architectureHeading": "// FRONTEND ARCHITECTURE & SYSTEM LAYERING",
+    "techStackHeading": "// TECH STACK & CORE DEPENDENCIES",
+    "visualsHeading": "VISUAL_SHOWCASE // SLIDESHOW VIEW",
+    "zoomTooltip": "Tap or click for fullscreen inspection (Supports horizontal swipe navigation)",
+    "noVisualsHeading": "Documentation, Assets & Demos on GitHub",
+    "noVisualsDesc": "For complete component hierarchies, implementation walkthroughs, and interactive live previews, inspect the repository on GitHub.",
+    "viewRepoImages": "EXPLORE REPOSITORY & SPECS",
+    "btnGithub": "VIEW REPO ON GITHUB",
+    "btnLiveDemo": "EXPLORE LIVE DEMO",
+    "projects": {
+      "graphnext": {
+        "name": "Samaneh Fekr // High-Scale Graph & Data Visualization",
+        "category": "Process Mining, Vector Graphs & Visual Engine",
+        "tagline": "Real-time process graph engine and data streaming pipeline with binary deserialization and locked 60FPS UI performance.",
+        "overview": "Samaneh Fekr is a production full-stack analytics platform engineered for process mining, enterprise network analysis, and rendering massive node graphs. The backend leverages Python, FastAPI, Polars, and PostgreSQL for instantaneous DFG matrix extraction, while the Next.js 16 frontend integrates Apache Arrow, MsgPack, and off-thread Web Worker layout computations to achieve stutter-free 60FPS visualization.",
+        "architectureDetails": "Fully containerized full-stack architecture with Docker Compose: Python 3 (FastAPI) backend powered by Polars, ConnectorX, and PyArrow over PostgreSQL. Next.js 16 (App Router) and React 19 frontend integrating elkjs auto-layout inside Web Workers, @xyflow/react node canvas, D3-Sankey process flow diagrams, and isolated Zustand telemetry stores.",
+        "keyHighlights": [
+          "Developed high-throughput Python backend pipelines with FastAPI & Polars for instant DFG graph and variant path extraction",
+          "Engineered parallel off-thread ELK graph layout calculations in Web Workers, guaranteeing zero UI frame drops",
+          "Implemented client-server binary data streaming using Apache Arrow, MsgPack, and Zstandard compression",
+          "Visualized enterprise process flows and throughput bottlenecks with custom D3-Sankey diagrams",
+          "Architected comprehensive Docker Compose infrastructure spanning Frontend, Backend, and PostgreSQL services"
+        ],
+        "visualPlaceholderSubtitle": "Interactive node graph canvas, D3-Sankey flow diagrams, and process analytics charts"
+      },
+      "ascvd": {
+        "name": "ASCVD Cardiovascular Clinical Risk Engine",
+        "category": "Digital Health, Clinical Math & NextAuth",
+        "tagline": "10-year atherosclerotic cardiovascular risk calculator based on ACC/AHA clinical guidelines with cloud persistence.",
+        "overview": "ASCVD is a precision clinical web application engineered for physicians to calculate 10-year risk of atherosclerotic cardiovascular disease. It translates multi-variable medical regression formulas into responsive multi-step forms with immediate client-side validation, tracking patient biomarkers (blood pressure, cholesterol, diabetes, age) with secure cloud audit logs and personalized clinical guidelines.",
+        "architectureDetails": "Built on Next.js 15 and React 19 with strict TypeScript 5 type-safety and HeroUI design system. Cloud PostgreSQL persistence on Supabase managed through Prisma ORM. Secure SMS-based authentication and session persistence via NextAuth.js, Bcrypt password hashing, and custom analytical risk gauge rendering.",
+        "keyHighlights": [
+          "Implemented ACC/AHA 2013 pooled cohort equations with precision coefficient matrix mapping",
+          "Engineered smart multi-step clinical assessment forms with real-time biometric validation",
+          "Architected secure SMS one-time password (OTP) authentication and session lifecycle with NextAuth.js & Prisma",
+          "Automated clinical risk stratification with tailored therapeutic and lifestyle intervention recommendations",
+          "Designed historical timeline tracking to monitor longitudinal biomarker fluctuations on Supabase PostgreSQL"
+        ],
+        "visualPlaceholderSubtitle": "Multi-step laboratory data entry forms and real-time clinical risk measurement gauges"
+      },
+      "salma-admin": {
+        "name": "Salma Health & Nutrition Management Platform",
+        "category": "Enterprise Dashboard, Next.js 16 & HeroUI v3",
+        "tagline": "Comprehensive clinical management portal for multi-tier plan structures, pathology profiles, dynamic Q&A, and supplements with React Compiler.",
+        "overview": "Salma Admin Panel is an enterprise clinical dashboard engineered for medical teams to configure complex therapeutic regimens, manage dynamic diagnostic questionnaires, classify pathology profiles, and allocate nutritional supplements. Built with Next.js 16 and React 19, the platform emphasizes modular domain separation and instant zero-memo rendering.",
+        "architectureDetails": "Engineered with Next.js 16.2 and React 19.2 leveraging the official React Compiler and modern Tailwind CSS v4. Built on HeroUI v3 and @heroui/styles, optimized Solar Icons, silky transitions powered by Motion, and robust multi-domain form state coordination via Zustand.",
+        "keyHighlights": [
+          "Modular domain architecture with over 36KB of structured clean-code across Forms, Store, and Layout modules",
+          "Hierarchical plan structure configuration engine with dynamic nutritional supplement allocation",
+          "Reusable generic CRUD foundation (data tables, responsive action headers, inline operations)",
+          "Leveraged HeroUI v3 alongside the React 19 Compiler for automated memoization and instant renders",
+          "Predictable decoupled state orchestration with Zustand and synchronized dark/light mode via next-themes"
+        ],
+        "visualPlaceholderSubtitle": "Plan structure builder, supplement allocation matrix, clinical forms, and health dashboard"
+      },
+      "salma-app": {
+        "name": "Salma Native Health & Lifestyle Mobile App",
+        "category": "Cross-Platform Mobile, React Native & HeroUI Native",
+        "tagline": "High-performance native mobile app on Expo SDK 57, 60FPS Reanimated 4 gesture interactions, and Skia graphics.",
+        "overview": "Salma App is a unified native mobile companion for personal health management, medical regimens, nutritional tracking, and guided physical workouts. Developed on React Native New Architecture and Expo Router SDK 57, it pairs Shopify Skia 2D rendering with HeroUI Native and Uniwind styling to deliver a tactile, zero-stutter native experience.",
+        "architectureDetails": "Developed on React Native 0.86 and React 19 on Expo SDK 57 (New Architecture). Features HeroUI Native and Uniwind (Tailwind for RN), buttery 60FPS transitions via Reanimated 4 and Gesture Handler, frosted floating @gorhom/bottom-sheet dialogs, robust server sync with TanStack Query v5, and Zustand offline caching.",
+        "keyHighlights": [
+          "File-based modular navigation built on Expo Router v57 with strict end-to-end type safety",
+          "Advanced 2D graphic canvas rendering and real-time frosted glass shaders using Shopify Skia",
+          "Unified cross-platform design token synchronization via HeroUI Native and Uniwind",
+          "Fluid gesture interactions and bottom sheets powered by @gorhom/bottom-sheet & Reanimated 4",
+          "Intelligent server state synchronization and optimistic offline caching with TanStack Query and Zustand"
+        ],
+        "visualPlaceholderSubtitle": "Native mobile interfaces, interactive modal sheets, wellness plans, and Skia canvas components"
+      },
+      "ticketing-system": {
+        "name": "Enterprise Support & Real-Time Ticketing Platform",
+        "category": "Enterprise Architecture, Nuxt 3 & Custom Design System",
+        "tagline": "Live enterprise messaging and ticketing platform built 100% with bespoke hand-crafted UI components without bloated third-party libraries.",
+        "overview": "An end-to-end corporate support and ticket lifecycle management system built from scratch with an emphasis on zero-dependency craftsmanship. Every UI primitive—from bi-directional chat bubbles with agent/user differentiation, drawer overlays, dialog modals, and paginated data tables to dual-mode auth—was custom-engineered for minimal bundle size and maximal runtime performance.",
+        "architectureDetails": "Architected with Vue 3 and Nuxt.js featuring component-driven design and modular Tailwind CSS styling. Dual-mode authentication system (traditional password auth + SMS OTP), dynamic nested routing for real-time ticket state tracking (system/ticket/:id), and strict role-based access control.",
+        "keyHighlights": [
+          "Engineered 100% custom reusable design system without relying on third-party UI component libraries",
+          "Bespoke live chat interface with millisecond timestamp tracking and dynamic message payload handling",
+          "Corporate ticket management dashboard with multi-level filtering, instant search, and smart pagination",
+          "Resilient authentication supporting both traditional credential logins and SMS one-time passcode (OTP)",
+          "Clean dynamic routing architecture tracking ticket states from initiation through resolution and closure"
+        ],
+        "visualPlaceholderSubtitle": "Support chat bubble timeline, ticket monitoring status grids, and analytics dashboard"
+      }
+    }
+  },
+  "FeaturedCaseStudy": {
+    "eyebrow": "[FEATURED CASE STUDY // ARCHITECTURAL DEEP-DIVE]",
+    "heading": "Salma Health Platform & Clinical Plan Architecture",
+    "heroTitle": "Frontend Architecture & System Engineering for Salma Clinical Dashboard",
+    "heroParagraph": "Salma Admin is a scalable clinical management dashboard designed for medical specialists and operators. Engineered to configure multi-tier plan structures, pathology taxonomies, dynamic questionnaires, and supplement catalogs using HeroUI v3 and the React 19 Compiler.",
+    "specs": {
+      "framework": "FRAMEWORK:",
+      "designSystem": "DESIGN SYSTEM:",
+      "renderOptimizer": "RENDER OPTIMIZER:",
+      "stateManagement": "STATE MANAGEMENT:"
+    },
+    "chapters": {
+      "overview": {
+        "number": "01",
+        "title": "Product Overview & Scope",
+        "englishTitle": "OVERVIEW",
+        "subTitle": "System Mission, Purpose & Clinical Scope",
+        "text": "Salma Admin Panel serves as the operational command center for medical practitioners to configure personalized clinical regimens, diagnostic questionnaires, disease registries, and supplement allocations. Built with clear domain boundaries and decoupled CRUD abstractions, the platform allows rapid feature expansion without regression risks.",
+        "boxes": {
+          "role": "TECHNICAL ROLE:",
+          "roleVal": "Lead Frontend Architect",
+          "domain": "PRODUCT DOMAIN:",
+          "domainVal": "Clinical Health & Nutrition",
+          "performance": "ARCHITECTURE & PERF:",
+          "performanceVal": "React Compiler + Modular Core"
+        }
+      },
+      "challenge": {
+        "number": "02",
+        "title": "Engineering Challenges",
+        "englishTitle": "THE CHALLENGE",
+        "subTitle": "Deep Form State Orchestration & UI Consistency",
+        "points": [
+          "1. Deeply Nested Form State: In planStructure.tsx and questions.tsx, regimens involve multi-tier dependencies, conditional branch logic, and dynamic supplement allocation. Orchestrating concurrent validation while preserving a fluid UI without superfluous re-renders was the primary architectural challenge.",
+          "2. Cross-System UI Uniformity: Establishing reusable, standardized CRUD primitives to manage tables, batch row actions, and page headers consistently across disparate clinical domains.",
+          "3. 60FPS Performance on Heavy Forms: Leveraging the official React 19 Compiler to automate component memoization and minimize render overhead without cluttering codebase ergonomics with manual useMemo hooks."
+        ]
+      },
+      "approach": {
+        "number": "03",
+        "title": "Architecture & Philosophy",
+        "englishTitle": "THE APPROACH",
+        "subTitle": "Layered Domain Separation & Clean Separation of Concerns",
+        "sections": {
+          "viewModular": "// VIEW-BASED MODULAR ARCHITECTURE",
+          "viewModularText": "Decoupled system architecture across discrete feature domains: planStructure, questions, sickness taxonomy, supplementals, and education modules.",
+          "crudShared": "// REUSABLE CRUD ABSTRACTIONS & LOGIC SEPARATION",
+          "crudSharedText": "Created shared core primitives like entityTable.tsx, crudPageHeader.tsx, and rowActions.tsx that establish standardized interaction contracts across the portal.",
+          "zustand": "// LIGHTWEIGHT ATOMIC STATE VIA ZUSTAND",
+          "zustandText": "Coordinated sidebar visibility, active tabs, and cross-route state without incurring performance penalties on standard React re-renders."
+        }
+      },
+      "visuals": {
+        "number": "04",
+        "title": "Visuals & Source Specs",
+        "englishTitle": "VISUALS & DEMO",
+        "subTitle": "Component Layouts & Repository Walkthrough",
+        "placeholderTitle": "Component Hierarchies & Specs in GitHub Repo",
+        "placeholderDesc": "To inspect component structures, route layouts, and technical documentation for the Salma Health Platform, explore the GitHub repository.",
+        "btnGithub": "VIEW REPOSITORY ON GITHUB"
+      },
+      "designSystem": {
+        "number": "05",
+        "title": "Design System & UI Craft",
+        "englishTitle": "DESIGN SYSTEM & UI",
+        "subTitle": "HeroUI v3 Implementation & Tailwind CSS v4 Integration",
+        "sections": {
+          "heroui": "// HEROUI V3 + @HEROUI/STYLES",
+          "herouiText": "Adopted the modern HeroUI v3 component architecture powered by React Aria Components to guarantee top-tier accessibility (A11y), full keyboard navigation, and robust compound components (Buttons, Dropdowns, Modals, Tabs).",
+          "solar": "// HIGH-PERFORMANCE SOLAR ICONS",
+          "solarText": "Utilized @solar-icons/react-perf for consistent vector strokes and instantaneous tree-shakeable icon rendering with negligible bundle overhead."
+        }
+      },
+      "engineering": {
+        "number": "06",
+        "title": "Execution & Engineering",
+        "englishTitle": "ENGINEERING & EXECUTION",
+        "subTitle": "React 19 Compiler Architecture & Smooth Transitions",
+        "items": [
+          { "tag": "REACT 19 COMPILER (BABEL PLUGIN):", "desc": "Automated compile-time memoization eliminating redundant renders" },
+          { "tag": "ZUSTAND ATOMIC STATE:", "desc": "Isolated state management with zero global render churn" },
+          { "tag": "MOTION REACT (FRAMER MOTION V12):", "desc": "Buttery physics-based transitions across modals and views" }
+        ]
+      },
+      "outcome": {
+        "number": "07",
+        "title": "Impact & Deliverables",
+        "englishTitle": "OUTCOME & IMPACT",
+        "subTitle": "Measured Production Value & Clinical Ergonomics",
+        "sectionTitle": "// DELIVERED SYSTEM VALUE",
+        "text": "Delivered an ultra-responsive, visually coherent dashboard for clinical specialists that streamlines creating, configuring, and assigning complex medical regimens and supplement regimens with zero UI latency."
+      }
+    },
+    "signOff": "Extracted from verified repository salma_admin_panel"
+  },
+  "GraphNextCaseStudy": {
+    "eyebrow": "[FEATURED CASE STUDY 02 // MASSIVE GRAPH ENGINE]",
+    "heading": "Samaneh Fekr // High-Scale Graph & Data Flow Visualization",
+    "heroTitle": "Full-Stack Architecture of Samaneh Fekr // Process Mining & Graph Analytics Engine",
+    "heroParagraph": "Samaneh Fekr is a full-stack production platform for process mining and large-scale graph analysis; featuring a high-throughput backend pipeline built on FastAPI, Polars, PyArrow, and PostgreSQL paired with off-thread Web Worker layout rendering and interactive D3-Sankey flows in Next.js 16.",
+    "specs": {
+      "frontend": "FRONTEND:",
+      "backend": "BACKEND & API:",
+      "database": "DATABASE:",
+      "dataTransfer": "DATA TRANSFER:"
+    },
+    "chapters": {
+      "overview": {
+        "number": "01",
+        "title": "Scope & Mission",
+        "englishTitle": "OVERVIEW & PURPOSE",
+        "subTitle": "Large-Scale Structured Data Visualization & Process Analysis",
+        "text": "Samaneh Fekr is engineered for real-time processing and interactive exploration of massive enterprise transaction networks. It empowers data analysts to inspect complex node topologies, D3-Sankey flow diagrams, edge duration histograms, and case distribution metrics at a steady 60 frames per second.",
+        "boxes": {
+          "role": "TECHNICAL ROLE:",
+          "roleVal": "Full-Stack Systems Architect (Frontend & Backend)",
+          "domain": "DOMAIN EXPERTISE:",
+          "domainVal": "Process Mining & Graph Analytics",
+          "stack": "CORE STACK:",
+          "stackVal": "FastAPI + Polars + Next.js 16 + PostgreSQL"
+        }
+      },
+      "challenge": {
+        "number": "02",
+        "title": "Big Data Challenges",
+        "englishTitle": "BIG DATA CHALLENGES",
+        "subTitle": "Backend Graph Computation & Frontend Render Bottlenecks",
+        "points": [
+          "1. Heavy Backend Graph Computation (DFG Generation): Extracting Directly Follows Graphs (DFG), recurring variant paths, duration bottlenecks, and transition matrices across millions of database logs in Python led to severe slowdowns with standard Pandas. This was resolved using the multi-threaded Polars columnar engine.",
+          "2. Network Transfer & JSON Serialization Bottleneck: Transmitting massive graph matrices as text JSON congested bandwidth and locked the main thread. Implementing Apache Arrow binary streaming, MsgPack serialization, and Zstandard compression reduced payload sizes by over 90%.",
+          "3. Stutter-Free Graph Auto-Layout: Calculating 2D coordinates for hundreds of interconnected nodes via ELK.js was offloaded to background Web Workers, preventing any frame loss on the browser UI thread."
+        ]
+      },
+      "approach": {
+        "number": "03",
+        "title": "Data Flow & Sankey",
+        "englishTitle": "FLOW & SANKEY ARCHITECTURE",
+        "subTitle": "Fast Backend Pipelines, Binary Encoding & Sankey Flow Diagrams",
+        "sections": {
+          "backend": "// HIGH-SPEED PYTHON ANALYTICS ENGINE (FASTAPI + POLARS)",
+          "backendText": "Engineered processing pipelines in Python including graph.py (DFG graph extraction), variants.py (path aggregation), searchCase.py, and accelerated PostgreSQL querying via ConnectorX and PyArrow.",
+          "sankey": "// FRONTEND FLOW ENGINE (SANKEYFLOW.TSX + D3)",
+          "sankeyText": "Created bespoke SankeyFlow.tsx leveraging d3-sankey and d3-scale to intuitively communicate transaction volumes and throughput bottlenecks along process stages.",
+          "filter": "// RECURSIVE ACTIVITY FILTER (ACTIVITYTREEFILTER.TSX)",
+          "filterText": "Hierarchical multi-level branch selector enabling analysts to isolate graph sub-topologies with zero UI freezing."
+        }
+      },
+      "visuals": {
+        "number": "04",
+        "title": "Visuals & Demos",
+        "englishTitle": "VISUALS & DEMO",
+        "subTitle": "Interactive Graph Canvas & Visual Showcase",
+        "zoomHint": "VIEW FULL RESOLUTION",
+        "imgAlt": "Samaneh Fekr System Preview - Screenshot",
+        "placeholderBadge": "MEDIA ASSET CONTAINER",
+        "placeholderDesc": "High-resolution screenshots, video demos, and visual walkthroughs of the interactive graph engine and SankeyFlow diagram."
+      },
+      "designSystem": {
+        "number": "05",
+        "title": "State Machines & Nodes",
+        "englishTitle": "UI & STATE MACHINES",
+        "subTitle": "Explicit State Machines & Custom Interactive Canvas Nodes",
+        "boxes": {
+          "loading": "// LOADING STATE",
+          "loadingText": "GraphLoadingState.tsx with real-time download and binary decoding telemetry indicators.",
+          "ready": "// READY WORKBENCH",
+          "readyText": "GraphDataReadyState.tsx equipped with high-resolution export tools, zoom controls, and telemetry inspector.",
+          "empty": "// EMPTY / FALLBACK",
+          "emptyText": "GraphEmptyState.tsx offering contextual user guidance during edge-case queries or empty data scenarios."
+        },
+        "customNodes": "// BESPOKE GRAPH NODES & EDGES (CUSTOMNODE & STYLEDSMOOTHSTEPEDGE)",
+        "customNodesText": "Crafted custom canvas nodes with performance metrics and reactive edges equipped with real-time hovering tooltips (NodeTooltip & EdgeTooltip) detailing transition latencies and event volumes."
+      },
+      "engineering": {
+        "number": "06",
+        "title": "ELK Layout & Binary Pipeline",
+        "englishTitle": "ELK LAYOUT & BINARY DECODING",
+        "subTitle": "End-to-End Pipeline: From Polars to Web Workers and React 19",
+        "items": [
+          { "tag": "BACKEND POLARS & FASTAPI:", "desc": "Instantaneous DFG matrix extraction orders of magnitude faster than standard Pandas" },
+          { "tag": "LAYOUT-WORKER.TS (ELKJS):", "desc": "Offloaded complex geometric layout calculations to background Web Worker threads" },
+          { "tag": "APACHE ARROW & MSGPACK & ZSTD:", "desc": "Streamed, compressed, and decoded binary columnar data on both client and server" },
+          { "tag": "CONTAINERIZATION & POSTGRESQL:", "desc": "Reproducible multi-container architecture managed with Docker Compose" }
+        ]
+      },
+      "outcome": {
+        "number": "07",
+        "title": "Frame-Rate & Scalability",
+        "englishTitle": "PERFORMANCE OUTCOME",
+        "subTitle": "Production Throughput, Bandwidth Reduction & 60FPS Stability",
+        "sectionTitle": "// DELIVERED ENGINEERING METRICS",
+        "text": "Engineered an ultra-fast visualization engine that decodes massive binary payloads in milliseconds, performs geometric layouts off-thread in Web Workers, and sustains buttery 60FPS responsiveness under demanding analytics workloads."
+      }
+    },
+    "signOff": "Full-stack architecture & implementation (Python + React)"
+  },
+  "WhatIDo": {
+    "eyebrow": "[SECTION 02 // CORE ENGINEERING PILLARS]",
+    "heading": "Engineering Mindset & Architectural Pillars",
+    "calloutTag": "// PHILOSOPHY & SYSTEM ARCHITECTURE",
+    "calloutText": "The nexus of full-stack systems engineering, high-scale data visualization, native mobile development with Skia, and hand-crafted zero-dependency design systems.",
+    "calloutFooter": "VERIFIED ACROSS 16 PRODUCTION REPOSITORIES",
+    "evidenceStamp": "FULL_STACK_CRAFT // VERIFIED",
+    "evidenceHeader": "// CODEBASE PROOFS & ARCHITECTURAL EVIDENCE:",
+    "reposTag": "VERIFIED IN: ",
+    "pillars": {
+      "visualization-data": {
+        "number": "01",
+        "title": "Massive Data & Interactive Graph Engines",
+        "englishTitle": "HIGH-PERFORMANCE GRAPH & DATA VISUALIZATION",
+        "statement": "Sub-16ms rendering architecture for multi-thousand node graphs with zero frame drops via parallel Web Worker pipelines.",
+        "manifesto": "In analytical platforms like Samaneh Fekr (GraphNext) and Graph, the primary challenge is keeping the main UI thread unblocked. By delegating complex geometric layouts to Web Workers via ELK.js, utilizing Apache Arrow binary streaming, fzstd decompression, and D3-Sankey diagrams, massive datasets render at locked 60FPS.",
+        "evidenceStack": [
+          "Interactive node canvases and Sankey streams with xyflow/react, D3.js, and ApexCharts",
+          "Off-thread algorithmic graph auto-layout powered by Web Workers and ELK.js",
+          "Columnar data streaming and serialization using Apache Arrow, MsgPack, and Zstandard"
+        ],
+        "repos": "Samaneh Fekr (GraphNext), Graph"
+      },
+      "fullstack-data-engineering": {
+        "number": "02",
+        "title": "Full-Stack & High-Speed Data Pipelines",
+        "englishTitle": "FULL-STACK & HIGH-SPEED DATA PIPELINES",
+        "statement": "High-throughput endpoints with Python and Polars, robust PostgreSQL modeling, and Docker infrastructure.",
+        "manifesto": "My craft extends well below the presentation tier. In Samaneh Fekr and backend services, I architect data pipelines using Python (FastAPI) and the high-speed Polars engine rather than traditional Pandas, extracting graph matrices, process logs, and database queries with minimal latency and memory footprint.",
+        "evidenceStack": [
+          "Data processing microservices and DFG matrix generation with FastAPI and multi-threaded Polars",
+          "High-efficiency PostgreSQL integration with high-speed ConnectorX and PyArrow drivers",
+          "Comprehensive multi-service orchestration with Docker Compose"
+        ],
+        "repos": "Samaneh Fekr (BackEnd), nextjsRepositoryPattern"
+      },
+      "cross-platform-native": {
+        "number": "03",
+        "title": "Cross-Platform & Native Mobile with Skia",
+        "englishTitle": "CROSS-PLATFORM & NATIVE MOBILE ARCHITECTURE",
+        "statement": "Building mobile apps matching native performance with 2D Skia graphics and 60FPS gesture animations.",
+        "manifesto": "A truly premium mobile user experience requires a deep grasp of render threads and native gesture physics. In apps like Salma_app, combining React Native 0.86, Expo Router SDK 57, Shopify Skia 2D rendering, and Reanimated 4 results in fluid interfaces that feel completely native.",
+        "evidenceStack": [
+          "Modern mobile architecture on React Native New Architecture and Expo SDK 57",
+          "Advanced 2D graphics, real-time frosted shaders, and canvas rendering with Shopify Skia",
+          "Fluid touch gestures, modal sheets, and 60FPS transitions via Reanimated 4 and Bottom-Sheet"
+        ],
+        "repos": "Salma_app, salma_admin_panel, SalmaLanding"
+      },
+      "design-systems-architecture": {
+        "number": "04",
+        "title": "Zero-Dependency Design Systems & Modern Web",
+        "englishTitle": "ZERO-DEPENDENCY DESIGN SYSTEMS & MODERN WEB",
+        "statement": "Clean frontend architecture, 100% custom-crafted UI systems, and rich-text editing engines.",
+        "manifesto": "A senior engineer should never be handcuffed by third-party UI libraries. In projects like ticketing-system, every component (chat bubbles, drawers, paginated data grids) was built from scratch. In Karzar and Salma Admin, advanced Tiptap rich-text engines and HeroUI v3 are paired with the React 19 Compiler.",
+        "evidenceStack": [
+          "Zero-to-one custom design systems and reusable components without third-party dependencies",
+          "Rich-text editor integration using the Tiptap ecosystem in Next.js",
+          "Modern enterprise dashboard architecture with HeroUI v3, Zustand atomic stores, and NextAuth"
+        ],
+        "repos": "ticketing-system, Karzar, salma_admin_panel, ASCVD"
+      }
+    }
+  },
+  "AboutPhilosophy": {
+    "eyebrow": "[SECTION 03 // PERSONAL PHILOSOPHY & VALUES]",
+    "heading": "Driving Motivation, Craft & Engineering Values",
+    "personalTag": "WHO IS BEHIND THE CODE?",
+    "narrativeHeading": "I view software engineering as the intersection of «complex systems problem-solving» and «60FPS visual precision».",
+    "narrativeText": "What excites me in software development goes far beyond simply writing code: it is transforming intricate data structures, scalable workflows, and abstract ideas into a living, responsive, and resilient digital system. A remarkable product is born when clean architecture and data engineering unite with an uncompromising obsession for user ergonomics, tactile interactions, and bold visual identity.",
+    "narrativeFooter": "MOHAMMAD HOSSEIN GHOLAMI // MHGH0ST",
+    "focusStamp": "FOCUS: HIGH_CRAFT_ENGINEERING",
+    "approachHeader": "MY_APPROACH // WORKFLOW LOGIC",
+    "steps": [
+      "STEP 01 (Architecture & First Principles): Deeply understand problem fundamentals, design data pipelines, and map system topology before writing a single line of UI code.",
+      "STEP 02 (Modular Independence): Build bespoke design systems, resilient multi-step form state machines, and decoupled components free from unnecessary bloat.",
+      "STEP 03 (Uncompromising Performance): Optimize down to the binary level, delegate heavy workloads to Web Workers, and guarantee locked 60FPS UI fluidness."
+    ],
+    "principlesHeading": "// THREE GUIDING ENGINEERING PRINCIPLES (PHILOSOPHICAL PRINCIPLES):",
+    "principles": [
+      {
+        "number": "01",
+        "title": "Data Architecture & Problem Solving Before Surface Design",
+        "statement": "An outstanding product never starts with superficial decoration; it is brought to life through rigorous problem understanding, scalable data architecture, and structural clarity."
+      },
+      {
+        "number": "02",
+        "title": "Engineering Elegance, Speed & Respect for User Time",
+        "statement": "Sub-millisecond render response, zero layout shift, and silky frame rates are how we respect the user's time. Genuine quality resides in the details that are felt rather than merely seen."
+      },
+      {
+        "number": "03",
+        "title": "Autonomy, Longevity & Hand-Crafted Design Systems",
+        "statement": "Clean codebases, maintainable structures, and components independent of brittle pre-packaged UI kits mark the defining line between a temporary prototype and an enduring product."
+      }
+    ]
+  },
+  "ExperienceStack": {
+    "eyebrow": "[SECTION 04 // TECH STACK & PRACTICAL WORKFLOW]",
+    "heading": "Tooling Ecosystem & The Bridge from Design to Code",
+    "workflowTag": "// THE WORKFLOW BRIDGE",
+    "workflow": {
+      "idea": "CONCEPT",
+      "designSystem": "DESIGN SYSTEM",
+      "engineering": "SYSTEM EXECUTION",
+      "finalProduct": "SHIPPED PRODUCT",
+      "text": "I do not merely list libraries—every tool is a deliberately chosen instrument to solve specific problems, eliminate latency, and craft resilient, high-speed software."
+    },
+    "categories": {
+      "frontend-architecture": {
+        "number": "01",
+        "title": "Frontend Architecture & Design Systems",
+        "englishTitle": "FRONTEND ARCHITECTURE & DESIGN SYSTEMS",
+        "tagline": "Modern user interfaces built for maximum performance, strict type-safety, and decoupled component composition.",
+        "workflowMindset": "Structured clean code, bespoke components without bloated dependencies, and automated compile-time optimization via the official React 19 Compiler."
+      },
+      "visualization-graphics": {
+        "number": "02",
+        "title": "Massive Data Visualization & Graph Engines",
+        "englishTitle": "HIGH-SCALE DATA VISUALIZATION & DFG ENGINES",
+        "tagline": "Interactive rendering of thousands of nodes and process flow topologies with a locked 60FPS frame rate.",
+        "workflowMindset": "Delegating heavy layout calculations to background Web Workers and streaming data in binary formats to completely eliminate main-thread stutter."
+      },
+      "cross-platform-native": {
+        "number": "03",
+        "title": "Cross-Platform & Native Mobile with Skia",
+        "englishTitle": "CROSS-PLATFORM & NATIVE MOBILE ARCHITECTURE",
+        "tagline": "Mobile applications built to native standards with hardware-accelerated 2D graphics and fluid gestures.",
+        "workflowMindset": "Crafting authentic native feel on mobile by marrying the Shopify Skia graphics engine, 60FPS Reanimated transitions, and offline-first data synchronization."
+      },
+      "backend-data-pipelines": {
+        "number": "04",
+        "title": "High-Speed Backend, Databases & DevOps",
+        "englishTitle": "BACKEND PIPELINES, DATABASES & DEVOPS",
+        "tagline": "Rapid data processing microservices in Python, optimized database schemas, and reproducible container workflows.",
+        "workflowMindset": "Leveraging Polars and Python for high-throughput statistical math and graph matrices, connecting directly to client runtimes with Docker."
+      }
+    }
+  },
+  "Contact": {
+    "stamp": "END_OF_PAGE // FINAL INVITATION",
+    "locationStatus": "LOC: QOM [IRAN] • OPEN TO SENIOR LEADERSHIP, STAFF ROLES & HIGH-IMPACT COLLABORATIONS",
+    "eyebrow": "// LET'S BUILD SOMETHING EXTRAORDINARY",
+    "headline": "Let's architect something extraordinary and enduring together.",
+    "paragraph": "For technical discussions on high-scale systems, senior frontend / full-stack engineering opportunities, or consulting on complex architectures, reach out directly via Phone, Telegram, or Instagram.",
+    "phone": {
+      "tag": "PRIMARY_CONTACT // PHONE_CALL",
+      "number": "09379012568",
+      "desc": "Direct phone line for scheduling technical interviews, architecture consultations, and strategic opportunities.",
+      "callBtn": "DIRECT PHONE CALL",
+      "copyBtn": "COPY NUMBER",
+      "copied": "COPIED TO CLIPBOARD!"
+    },
+    "telegram": {
+      "title": "TELEGRAM",
+      "tag": "[QUICK_MESSAGE]",
+      "handle": "@MHgh0st_13",
+      "desc": "Direct messaging on Telegram for fast turnaround and daytime coordination.",
+      "cta": "SEND MESSAGE ON TELEGRAM"
+    },
+    "instagram": {
+      "title": "INSTAGRAM",
+      "tag": "[DIRECT]",
+      "handle": "@mhgh0st_13",
+      "desc": "Direct messages on Instagram and occasional technical updates.",
+      "cta": "VIEW INSTAGRAM PROFILE"
+    },
+    "copyright": "© 2026 MOHAMMAD HOSSEIN GHOLAMI (MHGH0ST)",
+    "githubLink": "GITHUB: @MHGH0ST"
+  },
+  "Cursor": {
+    "identity": "IDENTITY",
+    "projects": "PROJECTS",
+    "contact": "CONTACT",
+    "inspect": "INSPECT",
+    "chapter": "CHAPTER",
+    "callNow": "CALL_NOW",
+    "copy": "COPY",
+    "telegram": "TELEGRAM",
+    "instagram": "INSTAGRAM"
+  }
+}

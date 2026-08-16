@@ -3,8 +3,10 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowUp, ArrowDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function CustomScrollbar() {
+  const t = useTranslations("Common");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -25,7 +27,6 @@ export function CustomScrollbar() {
   useEffect(() => {
     window.addEventListener("scroll", updateScroll, { passive: true });
     window.addEventListener("resize", updateScroll, { passive: true });
-    updateScroll();
 
     return () => {
       window.removeEventListener("scroll", updateScroll);
@@ -88,11 +89,11 @@ export function CustomScrollbar() {
 
   return (
     <aside
-      className="fixed right-3 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center select-none font-mono"
+      className="fixed right-3 rtl:right-3 rtl:left-auto ltr:right-3 ltr:left-auto top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center select-none font-mono"
       style={{ direction: "ltr" }}
     >
       {/* Top Percentage Badge */}
-      <div className="mb-2 px-2 py-0.5 bg-[#111111] text-[#d4ff00] text-[10px] font-black border-2 border-[#111111] shadow-[3px_3px_0px_#0047ff] flex items-center gap-1.5">
+      <div className="mb-2 px-2 py-0.5 bg-[#111111] dark:bg-[#070809] text-[#d4ff00] text-[10px] font-black border-2 border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#0047ff] dark:shadow-[3px_3px_0px_#0047ff] flex items-center gap-1.5">
         <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b00] animate-pulse" />
         <span>{percentText}%</span>
       </div>
@@ -102,8 +103,9 @@ export function CustomScrollbar() {
         onClick={scrollToTop}
         whileHover={{ x: 2, y: -2 }}
         whileTap={{ x: 0, y: 0 }}
-        className="w-8 h-8 bg-[#d4ff00] hover:bg-[#0047ff] text-[#111111] hover:text-[#f4f3ef] border-2 border-[#111111] shadow-[3px_3px_0px_#111111] flex items-center justify-center mb-1.5 transition-colors cursor-pointer"
-        title="پرش به اول صفحه"
+        className="w-8 h-8 bg-[#d4ff00] dark:bg-[#0047ff] hover:bg-[#0047ff] dark:hover:bg-[#d4ff00] text-[#111111] dark:text-[#ffffff] dark:hover:text-[#111111] border-2 border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#111111] dark:shadow-[3px_3px_0px_#d4ff00] flex items-center justify-center mb-1.5 transition-colors cursor-pointer"
+        title={t("jumpToTop")}
+        aria-label={t("jumpToTop")}
       >
         <ArrowUp className="w-4 h-4 stroke-[3]" />
       </motion.button>
@@ -112,14 +114,14 @@ export function CustomScrollbar() {
       <div
         ref={trackRef}
         onClick={handleTrackClick}
-        className="relative w-8 h-[40vh] min-h-[220px] max-h-[380px] bg-[#f4f3ef] border-2 border-[#111111] shadow-[4px_4px_0px_#111111] cursor-pointer overflow-hidden p-0.5"
+        className="relative w-8 h-[40vh] min-h-[220px] max-h-[380px] bg-[#f4f3ef] dark:bg-[#141618] border-2 border-[#111111] dark:border-[#2b3038] shadow-[4px_4px_0px_#111111] dark:shadow-[4px_4px_0px_#0047ff] cursor-pointer overflow-hidden p-0.5"
       >
         {/* Background Caution Hatch Grid */}
         <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
+          className="absolute inset-0 opacity-20 dark:opacity-30 pointer-events-none"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(45deg, #111111 0, #111111 2px, transparent 0, transparent 8px)",
+              "repeating-linear-gradient(45deg, var(--color-ink-val) 0, var(--color-ink-val) 2px, transparent 0, transparent 8px)",
           }}
         />
 
@@ -133,15 +135,15 @@ export function CustomScrollbar() {
             top: `${scrollProgress * 100}%`,
             transform: `translateY(-${scrollProgress * 100}%)`,
           }}
-          className={`absolute left-0.5 right-0.5 h-12 border-2 border-[#111111] flex flex-col items-center justify-between p-1 cursor-grab active:cursor-grabbing transition-colors ${
+          className={`absolute left-0.5 right-0.5 h-12 border-2 border-[#111111] dark:border-[#2b3038] flex flex-col items-center justify-between p-1 cursor-grab active:cursor-grabbing transition-colors ${
             isDragging
               ? "bg-[#0047ff] text-[#f4f3ef] shadow-[2px_2px_0px_#d4ff00]"
-              : "bg-[#ff3b00] text-[#f4f3ef] hover:bg-[#d4ff00] hover:text-[#111111] shadow-[2px_2px_0px_#111111]"
+              : "bg-[#ff3b00] text-[#f4f3ef] hover:bg-[#d4ff00] hover:text-[#111111] shadow-[2px_2px_0px_#111111] dark:shadow-[2px_2px_0px_#0047ff]"
           }`}
         >
-          <div className="w-full h-1 bg-[#111111]" />
-          <div className="text-[8px] font-black -rotate-90 leading-none">
-            DRAG
+          <div className="w-full h-1 bg-[#111111] dark:bg-[#070809]" />
+          <div className="text-[8px] font-black -rotate-90 leading-none tracking-widest">
+            {t("drag")}
           </div>
           <div className="w-full h-1 bg-[#d4ff00]" />
         </div>
@@ -152,8 +154,9 @@ export function CustomScrollbar() {
         onClick={scrollToBottom}
         whileHover={{ x: 2, y: 2 }}
         whileTap={{ x: 0, y: 0 }}
-        className="w-8 h-8 bg-[#0047ff] hover:bg-[#ff3b00] text-[#f4f3ef] border-2 border-[#111111] shadow-[3px_3px_0px_#111111] flex items-center justify-center mt-1.5 transition-colors cursor-pointer"
-        title="پرش به انتهای صفحه"
+        className="w-8 h-8 bg-[#0047ff] hover:bg-[#ff3b00] text-[#f4f3ef] border-2 border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#111111] dark:shadow-[3px_3px_0px_#0047ff] flex items-center justify-center mt-1.5 transition-colors cursor-pointer"
+        title={t("jumpToBottom")}
+        aria-label={t("jumpToBottom")}
       >
         <ArrowDown className="w-4 h-4 stroke-[3]" />
       </motion.button>

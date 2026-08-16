@@ -1,3 +1,4 @@
+import { setRequestLocale } from "next-intl/server";
 import { HeaderNav } from "@/components/HeaderNav";
 import { HeroSection } from "@/components/HeroSection";
 import { CaseStudiesSection } from "@/components/CaseStudiesSection";
@@ -12,11 +13,18 @@ import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ImageLightboxProvider } from "@/components/ImageLightboxProvider";
 import { CustomScrollbar } from "@/components/CustomScrollbar";
 
-export default function Home() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <SmoothScrollProvider>
       <ImageLightboxProvider>
-        <main className="min-h-screen bg-[#f4f3ef] text-[#111111] font-sans selection:bg-[#d4ff00] selection:text-[#111111] relative">
+        <main className="min-h-screen bg-[#f4f3ef] dark:bg-[#0c0d0e] text-[#111111] dark:text-[#f2f1ec] font-sans selection:bg-[#d4ff00] selection:text-[#111111] dark:selection:bg-[#0047ff] dark:selection:text-[#d4ff00] relative">
           {/* Custom Precision Reticle & Crosshair Cursor */}
           <CustomBlueprintCursor />
 

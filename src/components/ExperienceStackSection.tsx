@@ -1,28 +1,14 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Terminal, ShieldCheck, Wrench, MoveLeft } from "lucide-react";
+import { ShieldCheck, Wrench, MoveLeft, MoveRight } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { SectionGeometry } from "./SectionGeometry";
 
-type StackCategory = {
-  number: string;
-  id: string;
-  title: string;
-  englishTitle: string;
-  tagline: string;
-  coreTools: string[];
-  workflowMindset: string;
-};
-
-const CATEGORIES: StackCategory[] = [
+const CATEGORY_CONFIGS = [
   {
-    number: "۰۱",
     id: "frontend-architecture",
-    title: "معماری فرانت‌اند و سیستم‌های دیزاین",
-    englishTitle: "FRONTEND ARCHITECTURE & DESIGN SYSTEMS",
-    tagline:
-      "ساخت رابط‌های کاربری مدرن با تمرکز بر پرفورمنس، تایپ‌سیفتی کامل و معماری کامپوننت‌های مستقل.",
     coreTools: [
       "Next.js 16 (App Router)",
       "React 19 / Compiler",
@@ -31,16 +17,9 @@ const CATEGORIES: StackCategory[] = [
       "HeroUI v3 / Aria",
       "Zustand / Motion",
     ],
-    workflowMindset:
-      "توسعه کدهای ساختاریافته، کامپوننت‌های دست‌ساز بدون وابستگی‌های زائد و بهینه‌سازی رندرینگ با کامپایلر رسمی React 19.",
   },
   {
-    number: "۰۲",
     id: "visualization-graphics",
-    title: "تصویرسازی داده‌های حجیم و موتورهای گراف",
-    englishTitle: "HIGH-SCALE DATA VISUALIZATION & DFG ENGINES",
-    tagline:
-      "رندر تعاملی هزاران نود و دیاگرام‌های جریان داده در فرانت‌اند با نرخ پایدار ۶۰ فریم بر ثانیه.",
     coreTools: [
       "@xyflow/react",
       "D3.js (Sankey / Scale)",
@@ -49,16 +28,9 @@ const CATEGORIES: StackCategory[] = [
       "Apache Arrow / MsgPack",
       "ApexCharts",
     ],
-    workflowMindset:
-      "انتقال محاسبات سنگین چیدمان گرافیکی به ترد پس‌زمینه (Web Worker) و استریم داده‌ها با فرمت‌های باینری برای حذف لگ مرورگر.",
   },
   {
-    number: "۰۳",
     id: "cross-platform-native",
-    title: "توسعه موبایل نیتیو و گرافیک پیشرفته Skia",
-    englishTitle: "CROSS-PLATFORM & NATIVE MOBILE ARCHITECTURE",
-    tagline:
-      "توسعه اپلیکیشن‌های موبایل همگام با استانداردهای بومی، گرافیک ۲ بعدی و انیمیشن‌های روان.",
     coreTools: [
       "React Native 0.86",
       "Expo SDK 57 / Router",
@@ -67,16 +39,9 @@ const CATEGORIES: StackCategory[] = [
       "Uniwind (Tailwind for RN)",
       "@gorhom/bottom-sheet",
     ],
-    workflowMindset:
-      "خلق تجربه کاربری بومی روی موبایل با تلفیق موتور گرافیکی Skia، انیمیشن‌های ۶۰ فریم Reanimated و مدیریت آفلاین داده‌ها.",
   },
   {
-    number: "۰۴",
     id: "backend-data-pipelines",
-    title: "بک‌اند پرسرعت، پایگاه داده و زیرساخت داکر",
-    englishTitle: "BACKEND PIPELINES, DATABASES & DEVOPS",
-    tagline:
-      "طراحی سرویس‌های سریع پردازش داده با پایتون، اتصال به دیتابیس و مدیریت کانتینرها.",
     coreTools: [
       "Python 3 (FastAPI)",
       "Polars (High-Speed DataFrames)",
@@ -85,133 +50,157 @@ const CATEGORIES: StackCategory[] = [
       "ConnectorX / PyArrow",
       "NextAuth.js / JWT",
     ],
-    workflowMindset:
-      "استفاده از Polars و پایتون برای محاسبات سریع آماری و ماتریس‌های گراف و اتصال مستقیم به کلاینت از طریق داکر.",
   },
-];
+] as const;
 
 export function ExperienceStackSection() {
+  const t = useTranslations("ExperienceStack");
+  const locale = useLocale();
+  const isRtl = locale === "fa";
+
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const headerX = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-  const bannerScale = useTransform(scrollYProgress, [0.1, 0.4], [0.96, 1]);
+  const headerX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [0, 0] : isRtl ? [-50, 50] : [50, -50]
+  );
+  const bannerScale = useTransform(scrollYProgress, [0.1, 0.4], [0.98, 1]);
+
+  const FlowArrow = isRtl ? MoveLeft : MoveRight;
 
   return (
     <section
       ref={containerRef}
       id="experience-stack"
-      className="py-16 sm:py-24 border-b border-[#111111] bg-swiss-grid relative select-none overflow-hidden"
+      className="py-12 sm:py-20 border-b border-[#111111] dark:border-[#2b3038] bg-swiss-grid relative overflow-hidden"
     >
       {/* Integrated Section Geometry */}
       <SectionGeometry variant="stack" scrollYProgress={scrollYProgress} />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header Banner with Continuous Scroll Horizontal Translation */}
+        {/* Section Header Banner */}
         <motion.div
           style={{ x: headerX }}
-          className="mb-14 border-b border-[#111111] pb-6 flex flex-wrap items-end justify-between gap-4 bg-[#f4f3ef] p-5 border shadow-[4px_4px_0px_#111111]"
+          className="mb-8 sm:mb-14 border-b border-[#111111] dark:border-[#2b3038] pb-4 sm:pb-6 flex flex-wrap items-end justify-between gap-4 bg-[#f4f3ef] dark:bg-[#141618] p-4 sm:p-5 border shadow-[4px_4px_0px_#111111] dark:shadow-[4px_4px_0px_#0047ff]"
         >
           <div>
-            <div className="text-xs font-bold text-[#0047ff] uppercase tracking-wider mb-2 flex items-center gap-2 font-mono">
+            <div className="text-xs font-bold text-[#0047ff] dark:text-[#d4ff00] uppercase tracking-wider mb-2 flex items-center gap-2 font-mono">
               <Wrench className="w-4 h-4 text-[#ff3b00]" />
-              <span>[بخش ۰۴ // پشته ابزارها و تجربه عملی]</span>
+              <span>{t("eyebrow")}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#111111] tracking-tight uppercase">
-              پشته ابزارها و پل دیزاین تا پیاده‌سازی
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#111111] dark:text-[#f2f1ec] tracking-tight uppercase">
+              {t("heading")}
             </h2>
           </div>
-          <div className="font-mono text-xs text-[#555555]">
+          <div className="font-mono text-xs text-[#555555] dark:text-[#9fa4ab]">
             WORKFLOW & TECHNICAL TOOLKIT
           </div>
         </motion.div>
 
-        {/* Conceptual Manifesto with Scroll Expansion */}
+        {/* Conceptual Manifesto with Direction-Aware Flow Arrows */}
         <motion.div
           style={{ scale: bannerScale }}
-          className="mb-16 p-6 sm:p-8 bg-[#111111] text-[#f4f3ef] border-2 border-[#111111] shadow-[8px_8px_0px_#0047ff] grid grid-cols-1 md:grid-cols-4 gap-6 items-center origin-center"
+          className="mb-8 sm:mb-16 p-5 sm:p-8 bg-[#111111] dark:bg-[#070809] text-[#f4f3ef] border-2 border-[#111111] dark:border-[#2b3038] shadow-[6px_6px_0px_#0047ff] sm:shadow-[8px_8px_0px_#0047ff] grid grid-cols-1 md:grid-cols-4 gap-6 items-center origin-center"
         >
-          <div className="md:col-span-3 space-y-2">
+          <div className="md:col-span-4 space-y-3">
             <span className="text-xs font-mono text-[#d4ff00] font-bold uppercase tracking-wider">
-              // THE WORKFLOW BRIDGE
+              {t("workflowTag")}
             </span>
-            <h3 className="text-lg flex gap-x-2 items-center sm:text-2xl font-black text-[#f4f3ef]">
-              ایده <MoveLeft /> دیزاین سیستم <MoveLeft /> پیاده‌سازی فنی{" "}
-              <MoveLeft />
-              محصول نهایی
-            </h3>
-            <p className="text-xs sm:text-sm text-[#cccccc] font-medium leading-relaxed max-w-[60ch]">
-              من ابزارها را فقط لیست نمی‌کنم؛ بلکه از هر یک به عنوان وسیله‌ای
-              برای حل مسأله، حفظ سرعت لود و ساخت یک سیستم زنده، روان و زیبا
-              استفاده می‌کنم.
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-base sm:text-xl md:text-2xl font-black text-[#f4f3ef] leading-snug">
+              <span>{t("workflow.idea")}</span>
+              <FlowArrow className="w-4 h-4 sm:w-5 sm:h-5 text-[#0047ff] dark:text-[#d4ff00] shrink-0" />
+              <span>{t("workflow.designSystem")}</span>
+              <FlowArrow className="w-4 h-4 sm:w-5 sm:h-5 text-[#d4ff00] shrink-0" />
+              <span>{t("workflow.engineering")}</span>
+              <FlowArrow className="w-4 h-4 sm:w-5 sm:h-5 text-[#ff3b00] shrink-0" />
+              <span className="text-[#d4ff00]">{t("workflow.finalProduct")}</span>
+            </div>
+            <p className="text-xs sm:text-sm text-[#cccccc] dark:text-[#9fa4ab] font-medium leading-relaxed max-w-[60ch]">
+              {t("workflow.text")}
             </p>
           </div>
-          {/*<div className="md:col-span-1 border-t md:border-t-0 md:border-r border-[#333333] pt-4 md:pt-0 md:pr-6 font-mono text-xs text-[#cccccc] space-y-1">
-            <div className="text-[#d4ff00] font-bold">TOOLKIT_VERIFIED</div>
-            <div>بر اساس سورس کدهای واقعی</div>
-          </div>*/}
         </motion.div>
 
         {/* 4 Architectural Stack Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {CATEGORIES.map((category, idx) => (
-            <motion.div
-              key={category.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.6,
-                delay: idx * 0.12,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="bg-[#f4f3ef] border-2 border-[#111111] p-6 sm:p-8 shadow-[6px_6px_0px_#111111] hover:shadow-[10px_10px_0px_#0047ff] transition-all space-y-6 flex flex-col justify-between group"
-            >
-              <div className="space-y-4">
-                {/* Category Header Bar */}
-                <div className="flex items-center justify-between border-b border-[#111111] pb-3 font-mono text-xs">
-                  <span className="text-xl font-black text-[#0047ff] group-hover:text-[#ff3b00] transition-colors">
-                    {category.number}
-                  </span>
-                  <span className="font-bold text-[#111111]">
-                    {category.englishTitle}
-                  </span>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {CATEGORY_CONFIGS.map((config, idx) => {
+            const number = t(`categories.${config.id}.number`);
+            const title = t(`categories.${config.id}.title`);
+            const englishTitle = t(`categories.${config.id}.englishTitle`);
+            const tagline = t(`categories.${config.id}.tagline`);
+            const workflowMindset = t(`categories.${config.id}.workflowMindset`);
 
-                <h3 className="text-xl font-black text-[#111111] tracking-tight">
-                  {category.title}
-                </h3>
-
-                <p className="text-xs text-[#555555] font-semibold leading-relaxed">
-                  {category.tagline}
-                </p>
-
-                {/* Core Tools Badges */}
-                <div className="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-                  {category.coreTools.map((tool, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-3 py-1.5 bg-[#e9e7e1] text-[#111111] font-bold border border-[#111111] group-hover:border-[#0047ff] group-hover:bg-[#111111] group-hover:text-[#f4f3ef] transition-colors"
-                    >
-                      {tool}
+            return (
+              <motion.div
+                key={config.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{
+                  duration: 0.5,
+                  delay: idx * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="bg-[#f4f3ef] dark:bg-[#141618] border-2 border-[#111111] dark:border-[#2b3038] p-5 sm:p-8 shadow-[5px_5px_0px_#111111] dark:shadow-[5px_5px_0px_#0047ff] hover:shadow-[8px_8px_0px_#0047ff] dark:hover:shadow-[8px_8px_0px_#d4ff00] transition-all space-y-5 sm:space-y-6 flex flex-col justify-between group"
+              >
+                <div className="space-y-4">
+                  {/* Category Header Bar */}
+                  <div className="flex items-center justify-between border-b border-[#111111] dark:border-[#2b3038] pb-3 font-mono text-xs gap-2">
+                    <span className="text-xl font-black text-[#0047ff] dark:text-[#d4ff00] group-hover:text-[#ff3b00] transition-colors shrink-0">
+                      {number}
                     </span>
-                  ))}
-                </div>
-              </div>
+                    <span className="font-bold text-[#111111] dark:text-[#f2f1ec] text-[11px] sm:text-xs truncate">
+                      {englishTitle}
+                    </span>
+                  </div>
 
-              {/* Workflow Mindset Footer */}
-              <div className="pt-4 border-t border-[#111111] text-[11px] text-[#555555] font-semibold flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#0047ff] shrink-0 mt-0.5" />
-                <span className="leading-relaxed">
-                  {category.workflowMindset}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                  <h3 className="text-lg sm:text-xl font-black text-[#111111] dark:text-[#f2f1ec] tracking-tight">
+                    {title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#555555] dark:text-[#9fa4ab] font-semibold leading-relaxed">
+                    {tagline}
+                  </p>
+
+                  {/* Core Tools Badges */}
+                  <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                    {config.coreTools.map((tool, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-3 py-1.5 bg-[#e9e7e1] dark:bg-[#1b1e22] text-[#111111] dark:text-[#f2f1ec] font-bold border border-[#111111] dark:border-[#2b3038] group-hover:border-[#0047ff] dark:group-hover:border-[#d4ff00] group-hover:bg-[#111111] dark:group-hover:bg-[#0c0d0e] group-hover:text-[#f4f3ef] dark:group-hover:text-[#d4ff00] transition-colors"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Workflow Mindset Footer */}
+                <div className="pt-4 border-t border-[#111111] dark:border-[#2b3038] text-xs text-[#555555] dark:text-[#9fa4ab] font-semibold flex items-start gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#0047ff] dark:text-[#d4ff00] shrink-0 mt-0.5" />
+                  <span className="leading-relaxed">
+                    {workflowMindset}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

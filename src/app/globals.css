@@ -1,57 +1,105 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-paper: #f4f3ef;
-  --color-paper-muted: #e9e7e1;
-  --color-ink: #111111;
-  --color-ink-muted: #555555;
-  --color-ink-faint: #888888;
-  --color-ink-subtle: #cccccc;
+  --color-paper: var(--color-paper-val);
+  --color-paper-muted: var(--color-paper-muted-val);
+  --color-ink: var(--color-ink-val);
+  --color-ink-muted: var(--color-ink-muted-val);
+  --color-ink-faint: var(--color-ink-faint-val);
+  --color-ink-subtle: var(--color-ink-subtle-val);
 
   --color-cobalt: #0047ff;
   --color-lime: #d4ff00;
   --color-ember: #ff3b00;
 
-  --font-sans: var(--font-kalameh), 'Kalameh', system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-kalameh), 'Kalameh', monospace;
+  --font-sans: var(--font-kalameh), var(--font-geist-sans), 'Kalameh', system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), var(--font-kalameh), 'Kalameh', monospace;
 }
 
 :root {
   --background: #f4f3ef;
   --foreground: #111111;
+
+  --color-paper-val: #f4f3ef;
+  --color-paper-muted-val: #e9e7e1;
+  --color-ink-val: #111111;
+  --color-ink-muted-val: #555555;
+  --color-ink-faint-val: #888888;
+  --color-ink-subtle-val: #cccccc;
+
+  --border-color: #111111;
+  --card-bg: #f4f3ef;
+  --card-alt-bg: #e9e7e1;
+  --card-dark-bg: #111111;
+  --header-bg: rgba(244, 243, 239, 0.95);
+  --grid-line: rgba(17, 17, 17, 0.07);
+  --dot-color: rgba(17, 17, 17, 0.15);
+  --selection-bg: #d4ff00;
+  --selection-text: #111111;
+}
+
+.dark {
+  --background: #0c0d0e;
+  --foreground: #f2f1ec;
+
+  --color-paper-val: #141618;
+  --color-paper-muted-val: #1b1e22;
+  --color-ink-val: #f2f1ec;
+  --color-ink-muted-val: #9fa4ab;
+  --color-ink-faint-val: #6e747e;
+  --color-ink-subtle-val: #323740;
+
+  --border-color: #2b3038;
+  --card-bg: #141618;
+  --card-alt-bg: #1b1e22;
+  --card-dark-bg: #070809;
+  --header-bg: rgba(12, 13, 14, 0.92);
+  --grid-line: rgba(242, 241, 236, 0.06);
+  --dot-color: rgba(242, 241, 236, 0.14);
+  --selection-bg: #0047ff;
+  --selection-text: #d4ff00;
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: light dark;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  direction: rtl;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Structural CAD/Swiss Hairline Grid background pattern */
+/* Structural CAD/Swiss Hairline Grid background pattern - Direction & Theme Aware */
 .bg-swiss-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to left, rgba(17, 17, 17, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(17, 17, 17, 0.07) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+}
+
+[dir="rtl"] .bg-swiss-grid {
+  background-image: 
+    linear-gradient(to left, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
 }
 
 .bg-dot-grid {
   background-size: 20px 20px;
-  background-image: radial-gradient(circle, rgba(17, 17, 17, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
 }
 
 /* Custom selection styling */
 ::selection {
-  background-color: #d4ff00;
-  color: #111111;
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 /* Custom Focus Ring for Accessibility */
@@ -60,19 +108,82 @@ body {
   outline-offset: 2px;
 }
 
-/* ==========================================================================
-   HIDE NATIVE BROWSER SCROLLBAR (Full Custom Scrollbar Replacement)
-   ========================================================================== */
-
-/* Firefox */
-html, body {
-  scrollbar-width: none !important;
+/* Typography refinements per locale */
+[lang="en"] body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.01em;
 }
 
-/* Chrome, Edge, Safari, Opera */
-::-webkit-scrollbar {
-  display: none !important;
-  width: 0px !important;
-  height: 0px !important;
-  background: transparent !important;
+[lang="en"] .font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+[lang="fa"] body {
+  font-family: var(--font-kalameh), 'Kalameh', system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* ==========================================================================
+   SCROLLBAR & SAFE-AREA CONFIGURATION
+   ========================================================================== */
+
+/* On desktop, hide browser scrollbar to use Neobrutalist HUD scrollbar */
+@media (min-width: 768px) {
+  html, body {
+    scrollbar-width: none !important;
+  }
+
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+}
+
+/* On mobile, retain clean native scrollbar indicator for location context */
+@media (max-width: 767px) {
+  html, body {
+    scrollbar-width: thin;
+    scrollbar-color: #0047ff var(--color-paper-muted-val);
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-paper-muted-val);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #0047ff;
+  }
+}
+
+/* Safe-area utility helpers */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-left {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+
+.safe-right {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Utility to ensure mobile horizontal scroll strips don't wrap and look neat */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

@@ -36,7 +36,7 @@ export function SparkleStar({
       viewBox="0 0 100 100"
       width={size}
       height={size}
-      className={`overflow-visible drop-shadow-[4px_4px_0px_#111111] ${className}`}
+      className={`overflow-visible drop-shadow-[4px_4px_0px_rgba(0,0,0,0.5)] ${className}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -66,14 +66,13 @@ export function StarburstSticker({
   text?: string;
   className?: string;
 }) {
-  // Exact 12-point starburst polygon (12 outer points R=50, 12 inner points r=38, center 55,55)
   const numPoints = 12;
   const outerR = 50;
   const innerR = 38;
   const cx = 55;
   const cy = 55;
 
-  let pointsArr = [];
+  const pointsArr: string[] = [];
   for (let i = 0; i < numPoints * 2; i++) {
     const r = i % 2 === 0 ? outerR : innerR;
     const angle = (i * Math.PI) / numPoints - Math.PI / 2;
@@ -88,7 +87,7 @@ export function StarburstSticker({
       viewBox="0 0 110 110"
       width={size}
       height={size}
-      className={`overflow-visible ${className}`}
+      className={`overflow-visible drop-shadow-[4px_4px_0px_rgba(0,0,0,0.5)] ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <polygon
@@ -104,7 +103,7 @@ export function StarburstSticker({
           x={cx}
           y={cy + 4}
           textAnchor="middle"
-          fill={stroke}
+          fill="#111111"
           fontSize="9"
           fontWeight="900"
           fontFamily="monospace"
@@ -116,7 +115,7 @@ export function StarburstSticker({
   );
 }
 
-/** Giant Raw Elongated 12-Point Star (No shadow, long rays, flat phosphor lime #d4ff00) */
+/** Giant Raw Elongated 12-Point Star */
 export function GiantElongatedStar({
   size = 700,
   fill = "#d4ff00",
@@ -128,14 +127,13 @@ export function GiantElongatedStar({
   stroke?: string;
   className?: string;
 }) {
-  // Deeply elongated rays: outer radius 100, inner radius 28 (very long, sharp spikes)
   const numPoints = 12;
   const outerR = 100;
   const innerR = 28;
   const cx = 110;
   const cy = 110;
 
-  let pointsArr = [];
+  const pointsArr: string[] = [];
   for (let i = 0; i < numPoints * 2; i++) {
     const r = i % 2 === 0 ? outerR : innerR;
     const angle = (i * Math.PI) / numPoints - Math.PI / 2;
@@ -180,7 +178,7 @@ export function AsteriskBadge({
       viewBox="0 0 100 100"
       width={size}
       height={size}
-      className={`overflow-visible drop-shadow-[4px_4px_0px_#111111] ${className}`}
+      className={`overflow-visible drop-shadow-[4px_4px_0px_rgba(0,0,0,0.5)] ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g fill={fill} stroke={stroke} strokeWidth="3">
@@ -212,44 +210,40 @@ export function AsteriskBadge({
 export function NotchedTicket({
   tag = "SPEC_01",
   code = "MHG-902",
-  color = "#f4f3ef",
   accentColor = "#0047ff",
   className = "",
 }: {
   tag?: string;
   code?: string;
-  color?: string;
   accentColor?: string;
   className?: string;
 }) {
   return (
     <div
-      className={`relative w-44 h-24 border-2 border-[#111111] bg-[${color}] p-2.5 flex flex-col justify-between shadow-[5px_5px_0px_#111111] ${className}`}
-      style={{ backgroundColor: color }}
+      className={`relative w-44 h-24 border-2 border-[#111111] dark:border-[#2b3038] bg-[#f4f3ef] dark:bg-[#141618] p-2.5 flex flex-col justify-between shadow-[5px_5px_0px_#111111] dark:shadow-[5px_5px_0px_#0047ff] ${className}`}
     >
-      {/* Left & Right Circular Punch Notches */}
-      <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#f4f3ef] border-r-2 border-[#111111]" />
-      <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#f4f3ef] border-l-2 border-[#111111]" />
+      <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#f4f3ef] dark:bg-[#0c0d0e] border-r-2 border-[#111111] dark:border-[#2b3038]" />
+      <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#f4f3ef] dark:bg-[#0c0d0e] border-l-2 border-[#111111] dark:border-[#2b3038]" />
 
-      <div className="flex items-center justify-between border-b border-dashed border-[#111111] pb-1.5 px-2">
-        <span className="font-mono text-[10px] font-black text-[#111111] tracking-wider">
-          // {tag}
+      <div className="flex items-center justify-between border-b border-dashed border-[#111111] dark:border-[#2b3038] pb-1.5 px-2">
+        <span className="font-mono text-[10px] font-black text-[#111111] dark:text-[#f2f1ec] tracking-wider">
+          &#47;&#47; {tag}
         </span>
         <span
-          className="w-2.5 h-2.5 rounded-full border border-[#111111]"
+          className="w-2.5 h-2.5 rounded-full border border-[#111111] dark:border-[#2b3038]"
           style={{ backgroundColor: accentColor }}
         />
       </div>
 
-      <div className="flex items-center justify-between px-2 pt-1 font-mono text-[9px] text-[#555555]">
+      <div className="flex items-center justify-between px-2 pt-1 font-mono text-[9px] text-[#555555] dark:text-[#9fa4ab]">
         <span>CODE: {code}</span>
         <div className="flex gap-0.5 items-center h-4">
-          <div className="w-[1.5px] h-full bg-[#111111]" />
-          <div className="w-[3px] h-full bg-[#111111]" />
-          <div className="w-[1px] h-full bg-[#111111]" />
-          <div className="w-[2.5px] h-full bg-[#111111]" />
-          <div className="w-[1px] h-full bg-[#111111]" />
-          <div className="w-[3.5px] h-full bg-[#111111]" />
+          <div className="w-[1.5px] h-full bg-[#111111] dark:bg-[#f2f1ec]" />
+          <div className="w-[3px] h-full bg-[#111111] dark:bg-[#f2f1ec]" />
+          <div className="w-[1px] h-full bg-[#111111] dark:bg-[#f2f1ec]" />
+          <div className="w-[2.5px] h-full bg-[#111111] dark:bg-[#f2f1ec]" />
+          <div className="w-[1px] h-full bg-[#111111] dark:bg-[#f2f1ec]" />
+          <div className="w-[3.5px] h-full bg-[#111111] dark:bg-[#f2f1ec]" />
         </div>
       </div>
     </div>
@@ -259,12 +253,10 @@ export function NotchedTicket({
 /** Architectural Geometric Portal / Arch */
 export function ArchitecturalArch({
   size = 110,
-  fill = "#f4f3ef",
   accentFill = "#d4ff00",
   className = "",
 }: {
   size?: number;
-  fill?: string;
   accentFill?: string;
   className?: string;
 }) {
@@ -276,27 +268,24 @@ export function ArchitecturalArch({
       className={`overflow-visible drop-shadow-[5px_5px_0px_#0047ff] ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Outer Arch */}
       <path
         d="M 10 120 L 10 50 A 40 40 0 0 1 90 50 L 90 120 Z"
-        fill={fill}
-        stroke="#111111"
+        fill="var(--card-bg)"
+        stroke="var(--border-color)"
         strokeWidth="3.5"
         strokeLinejoin="round"
       />
-      {/* Inner Nested Arch */}
       <path
         d="M 22 120 L 22 55 A 28 28 0 0 1 78 55 L 78 120 Z"
         fill={accentFill}
-        stroke="#111111"
+        stroke="var(--border-color)"
         strokeWidth="2"
         strokeDasharray="4 3"
       />
-      {/* Target Crosshair */}
-      <circle cx="50" cy="55" r="8" fill="none" stroke="#111111" strokeWidth="2" />
-      <line x1="50" y1="40" x2="50" y2="70" stroke="#111111" strokeWidth="2" />
-      <line x1="35" y1="55" x2="65" y2="55" stroke="#111111" strokeWidth="2" />
-      <rect x="47" y="100" width="6" height="6" fill="#ff3b00" stroke="#111111" strokeWidth="1.5" />
+      <circle cx="50" cy="55" r="8" fill="none" stroke="var(--border-color)" strokeWidth="2" />
+      <line x1="50" y1="40" x2="50" y2="70" stroke="var(--border-color)" strokeWidth="2" />
+      <line x1="35" y1="55" x2="65" y2="55" stroke="var(--border-color)" strokeWidth="2" />
+      <rect x="47" y="100" width="6" height="6" fill="#ff3b00" stroke="var(--border-color)" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -320,10 +309,9 @@ export function IsometricCube({
       viewBox="0 0 100 115"
       width={size}
       height={(size * 115) / 100}
-      className={`overflow-visible drop-shadow-[5px_5px_0px_#111111] ${className}`}
+      className={`overflow-visible drop-shadow-[5px_5px_0px_rgba(0,0,0,0.5)] ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Top Face */}
       <polygon
         points="50,5 90,28 50,51 10,28"
         fill={topFill}
@@ -331,7 +319,6 @@ export function IsometricCube({
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      {/* Left Face */}
       <polygon
         points="10,28 50,51 50,97 10,74"
         fill={leftFill}
@@ -339,7 +326,6 @@ export function IsometricCube({
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      {/* Right Face */}
       <polygon
         points="50,51 90,28 90,74 50,97"
         fill={rightFill}
@@ -347,7 +333,6 @@ export function IsometricCube({
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      {/* Technical CAD Center Accent */}
       <circle cx="50" cy="51" r="3" fill="#ff3b00" />
     </svg>
   );
@@ -367,14 +352,14 @@ export function PostageStampBadge({
 }) {
   return (
     <div
-      className={`relative w-28 h-32 p-2 border-2 border-dashed border-[#111111] shadow-[4px_4px_0px_#111111] flex flex-col justify-between items-center ${className}`}
+      className={`relative w-28 h-32 p-2 border-2 border-dashed border-[#111111] dark:border-[#2b3038] shadow-[4px_4px_0px_#111111] dark:shadow-[4px_4px_0px_#0047ff] flex flex-col justify-between items-center ${className}`}
       style={{ backgroundColor: color }}
     >
-      <div className="w-full flex justify-between items-center font-mono text-[9px] font-black text-[#111111] border-b border-[#111111] pb-1">
+      <div className="w-full flex justify-between items-center font-mono text-[9px] font-black text-[#111111] border-b border-[#111111] dark:border-[#2b3038] pb-1">
         <span>POSTAGE</span>
         <span>{number}</span>
       </div>
-      <div className="w-14 h-14 rounded-full border-2 border-[#111111] bg-[#f4f3ef] flex items-center justify-center font-black font-mono text-sm shadow-[2px_2px_0px_#0047ff]">
+      <div className="w-14 h-14 rounded-full border-2 border-[#111111] dark:border-[#2b3038] bg-[#f4f3ef] dark:bg-[#141618] text-[#111111] dark:text-[#f2f1ec] flex items-center justify-center font-black font-mono text-sm shadow-[2px_2px_0px_#0047ff]">
         {number}
       </div>
       <span className="font-mono text-[8px] font-black tracking-widest text-[#111111] uppercase">
@@ -387,15 +372,11 @@ export function PostageStampBadge({
 /** Precision HUD Viewfinder Reticle */
 export function HudReticleCorners({ className = "" }: { className?: string }) {
   return (
-    <div className={`pointer-events-none absolute inset-4 border border-[#111111]/10 ${className}`}>
-      {/* Top Left */}
-      <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-t-2 border-l-2 border-[#111111]" />
-      {/* Top Right */}
-      <div className="absolute -top-1.5 -right-1.5 w-4 h-4 border-t-2 border-r-2 border-[#111111]" />
-      {/* Bottom Left */}
-      <div className="absolute -bottom-1.5 -left-1.5 w-4 h-4 border-b-2 border-l-2 border-[#111111]" />
-      {/* Bottom Right */}
-      <div className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-b-2 border-r-2 border-[#111111]" />
+    <div className={`pointer-events-none absolute inset-4 border border-[#111111]/10 dark:border-[#f2f1ec]/10 ${className}`}>
+      <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-t-2 border-l-2 border-[#111111] dark:border-[#f2f1ec]" />
+      <div className="absolute -top-1.5 -right-1.5 w-4 h-4 border-t-2 border-r-2 border-[#111111] dark:border-[#f2f1ec]" />
+      <div className="absolute -bottom-1.5 -left-1.5 w-4 h-4 border-b-2 border-l-2 border-[#111111] dark:border-[#f2f1ec]" />
+      <div className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-b-2 border-r-2 border-[#111111] dark:border-[#f2f1ec]" />
     </div>
   );
 }
@@ -405,8 +386,7 @@ export function HudReticleCorners({ className = "" }: { className?: string }) {
 /* -------------------------------------------------------------------------- */
 
 export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryProps) {
-  // Shared smooth scroll transforms
-  const fallbackVal = { get: () => 0 } as any;
+  const fallbackVal = { get: () => 0 } as unknown as MotionValue<number>;
   const activeProgress = scrollYProgress || fallbackVal;
 
   const rotateClockwise = useTransform(activeProgress, [0, 1], [0, 180]);
@@ -415,13 +395,15 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   const floatY = useTransform(activeProgress, [0, 1], [30, -30]);
   const scaleMorph = useTransform(activeProgress, [0, 0.5, 1], [0.95, 1.08, 0.98]);
 
+  const scrollSpin = useTransform(activeProgress, [0, 1], [0, 540]);
+  const scrollSpinCounter = useTransform(activeProgress, [0, 1], [0, -540]);
+
   /* ----------------------------- HERO VARIANT ----------------------------- */
   if (variant === "hero") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-80 dark:opacity-60">
         <HudReticleCorners />
 
-        {/* Top-Left: Rotating Retro Sparkle Star */}
         <motion.div
           style={{ rotate: rotateClockwise, y: floatY }}
           animate={{
@@ -438,7 +420,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           <SparkleStar size={64} fill="#d4ff00" />
         </motion.div>
 
-        {/* Top-Left Secondary Mini Sparkle */}
         <motion.div
           animate={{
             scale: [0.85, 1.15, 0.85],
@@ -454,7 +435,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           <SparkleStar size={28} fill="#ff3b00" />
         </motion.div>
 
-        {/* Bottom-Center: 12-Point Sunburst Badge with spinning animation */}
         <motion.div
           style={{ rotate: rotateCounter }}
           className="absolute bottom-12 left-[38%] hidden lg:block origin-center"
@@ -467,7 +447,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           </motion.div>
         </motion.div>
 
-        {/* Hero Bottom-Right Isometric 3D Cube */}
         <motion.div
           style={{ scale: scaleMorph, x: floatX }}
           className="absolute top-28 right-[3vw] hidden xl:block"
@@ -486,8 +465,7 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   /* ------------------------ SELECTED WORK VARIANT ------------------------- */
   if (variant === "selected-work") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Notched Punch-Card Ticket Floating on Top-Left */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-85 dark:opacity-65">
         <motion.div
           style={{ x: floatX, rotate: rotateClockwise }}
           className="absolute top-12 left-[3vw] hidden lg:block rotate-6"
@@ -495,13 +473,12 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           <NotchedTicket tag="PORTFOLIO_INDEX" code="PRJ_2025" accentColor="#ff3b00" />
         </motion.div>
 
-        {/* Bottom-Right: 4-Point Sparkle with Concentric Ring */}
         <motion.div
           style={{ rotate: rotateCounter, scale: scaleMorph }}
           className="absolute bottom-8 right-[3vw] hidden md:flex items-center gap-3"
         >
           <SparkleStar size={52} fill="#ff3b00" />
-          <div className="w-16 h-8 rounded-full border-2 border-[#111111] bg-[#d4ff00] flex items-center justify-center font-mono text-[9px] font-black shadow-[3px_3px_0px_#111111]">
+          <div className="w-16 h-8 rounded-full border-2 border-[#111111] dark:border-[#2b3038] bg-[#d4ff00] dark:bg-[#0047ff] text-[#111111] dark:text-[#d4ff00] flex items-center justify-center font-mono text-[9px] font-black shadow-[3px_3px_0px_#111111]">
             SELECTED
           </div>
         </motion.div>
@@ -512,16 +489,14 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   /* ---------------------- CASE STUDY: SALMA VARIANT ----------------------- */
   if (variant === "case-study-salma") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Top-Left Architectural Arch Geometry */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-85 dark:opacity-65">
         <motion.div
           style={{ y: floatY, rotate: rotateClockwise }}
           className="absolute top-16 left-[2vw] hidden lg:block -rotate-6"
         >
-          <ArchitecturalArch size={90} fill="#f4f3ef" accentFill="#d4ff00" />
+          <ArchitecturalArch size={90} accentFill="#d4ff00" />
         </motion.div>
 
-        {/* Bottom-Right Postage Stamp Badge */}
         <motion.div
           style={{ scale: scaleMorph, x: floatX }}
           className="absolute bottom-12 right-[2vw] hidden lg:block rotate-12"
@@ -529,7 +504,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           <PostageStampBadge label="SALMA_ADMIN" number="01" color="#ff3b00" />
         </motion.div>
 
-        {/* Floating Mini Sparkle */}
         <motion.div
           animate={{ rotate: 360, scale: [0.9, 1.1, 0.9] }}
           transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
@@ -544,8 +518,7 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   /* -------------------- CASE STUDY: GRAPHNEXT VARIANT --------------------- */
   if (variant === "case-study-graphnext") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Top-Right 3D Isometric Data Cube */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-85 dark:opacity-65">
         <motion.div
           style={{ x: floatX, rotate: rotateClockwise }}
           className="absolute top-14 left-[3vw] hidden lg:block"
@@ -558,7 +531,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           />
         </motion.div>
 
-        {/* Bottom-Left 12-Point Sunburst Spinning Badge */}
         <motion.div
           style={{ rotate: rotateCounter }}
           className="absolute bottom-12 right-[4vw] hidden lg:block origin-center"
@@ -577,8 +549,7 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   /* ------------------------- WHAT I DO VARIANT ---------------------------- */
   if (variant === "what-i-do") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Top-Left Spinning Asterisk / 8-Petal Flower */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-85 dark:opacity-65">
         <motion.div
           style={{ rotate: rotateClockwise, y: floatY }}
           className="absolute top-16 left-[3vw] hidden lg:block"
@@ -591,12 +562,11 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           </motion.div>
         </motion.div>
 
-        {/* Bottom-Right Architectural Arch */}
         <motion.div
           style={{ scale: scaleMorph, x: floatX }}
           className="absolute bottom-12 right-[2.5vw] hidden xl:block rotate-12"
         >
-          <ArchitecturalArch size={85} fill="#d4ff00" accentFill="#ff3b00" />
+          <ArchitecturalArch size={85} accentFill="#ff3b00" />
         </motion.div>
       </div>
     );
@@ -605,8 +575,7 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   /* ---------------------------- ABOUT VARIANT ----------------------------- */
   if (variant === "about") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Top-Left Retro Sparkle Star with Shadow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-85 dark:opacity-65">
         <motion.div
           style={{ scale: scaleMorph, rotate: rotateClockwise }}
           className="absolute top-16 left-[4vw] hidden lg:block"
@@ -614,7 +583,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           <SparkleStar size={60} fill="#d4ff00" />
         </motion.div>
 
-        {/* Bottom-Right Notched Ticket */}
         <motion.div
           style={{ x: floatX, rotate: rotateCounter }}
           className="absolute bottom-10 right-[3vw] hidden md:block -rotate-6"
@@ -628,8 +596,7 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
   /* ---------------------------- STACK VARIANT ----------------------------- */
   if (variant === "stack") {
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Bottom-Left Isometric Cube */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none opacity-85 dark:opacity-65">
         <motion.div
           style={{ x: floatX, rotate: rotateClockwise }}
           className="absolute bottom-12 left-[3vw] hidden lg:block"
@@ -642,7 +609,6 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           />
         </motion.div>
 
-        {/* Top-Right 12-Point Sunburst Badge */}
         <motion.div
           style={{ scale: scaleMorph, rotate: rotateCounter }}
           className="absolute top-16 right-[3vw] hidden lg:block"
@@ -660,28 +626,21 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
 
   /* --------------------------- CONTACT VARIANT ---------------------------- */
   if (variant === "contact") {
-    // Dynamic continuous rotation + scroll acceleration
-    // Base scroll spin adds up to 900 degrees when scrolling across contact section
-    const scrollSpin = useTransform(activeProgress, [0, 1], [0, 900]);
-    const scrollSpinCounter = useTransform(activeProgress, [0, 1], [0, -900]);
-
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* TOP-LEFT GIANT ELONGATED 12-POINT STAR (Responsive sizing & placement) */}
         <motion.div
           style={{ rotate: scrollSpin }}
-          className="absolute -top-24 -left-24 sm:-top-44 sm:-left-44 lg:-top-64 lg:-left-64 origin-center z-0 opacity-80 sm:opacity-90"
+          className="absolute -top-20 -left-20 sm:-top-44 sm:-left-44 lg:-top-64 lg:-left-64 origin-center z-0 opacity-70 sm:opacity-90 dark:opacity-40 will-change-transform"
         >
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+            transition={{ repeat: Infinity, duration: 32, ease: "linear" }}
           >
-            {/* Mobile: 360px | Tablet: 540px | Desktop: 750px */}
             <div className="block sm:hidden">
-              <GiantElongatedStar size={360} fill="#d4ff00" />
+              <GiantElongatedStar size={240} fill="#d4ff00" />
             </div>
             <div className="hidden sm:block lg:hidden">
-              <GiantElongatedStar size={540} fill="#d4ff00" />
+              <GiantElongatedStar size={480} fill="#d4ff00" />
             </div>
             <div className="hidden lg:block">
               <GiantElongatedStar size={750} fill="#d4ff00" />
@@ -689,21 +648,19 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
           </motion.div>
         </motion.div>
 
-        {/* BOTTOM-RIGHT GIANT ELONGATED 12-POINT STAR (Responsive sizing & placement) */}
         <motion.div
           style={{ rotate: scrollSpinCounter }}
-          className="absolute -bottom-28 -right-28 sm:-bottom-48 sm:-right-48 lg:-bottom-64 lg:-right-64 origin-center z-0 opacity-80 sm:opacity-90"
+          className="absolute -bottom-24 -right-24 sm:-bottom-48 sm:-right-48 lg:-bottom-64 lg:-right-64 origin-center z-0 opacity-70 sm:opacity-90 dark:opacity-40 will-change-transform"
         >
           <motion.div
             animate={{ rotate: -360 }}
-            transition={{ repeat: Infinity, duration: 28, ease: "linear" }}
+            transition={{ repeat: Infinity, duration: 36, ease: "linear" }}
           >
-            {/* Mobile: 380px | Tablet: 560px | Desktop: 780px */}
             <div className="block sm:hidden">
-              <GiantElongatedStar size={380} fill="#d4ff00" />
+              <GiantElongatedStar size={260} fill="#d4ff00" />
             </div>
             <div className="hidden sm:block lg:hidden">
-              <GiantElongatedStar size={560} fill="#d4ff00" />
+              <GiantElongatedStar size={500} fill="#d4ff00" />
             </div>
             <div className="hidden lg:block">
               <GiantElongatedStar size={780} fill="#d4ff00" />
@@ -716,4 +673,3 @@ export function SectionGeometry({ variant, scrollYProgress }: SectionGeometryPro
 
   return null;
 }
-

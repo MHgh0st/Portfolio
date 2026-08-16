@@ -1,65 +1,40 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import {
   motion,
   useScroll,
-  useTransform,
   AnimatePresence,
+  PanInfo,
 } from "framer-motion";
 import {
   ExternalLink,
   GitBranch,
   Layers,
-  Code,
   CheckCircle,
-  Maximize2,
-  X,
-  Image as ImageIcon,
   ChevronLeft,
   ChevronRight,
   ZoomIn,
 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { SectionGeometry } from "./SectionGeometry";
 import { useLightbox } from "./ImageLightboxProvider";
 
-type ProjectCase = {
+interface ProjectMeta {
   id: string;
-  name: string;
   repoName: string;
-  category: string;
-  tagline: string;
-  overview: string;
-  architectureDetails: string;
-  keyHighlights: string[];
-  techStack: string[];
   githubUrl: string;
   liveUrl?: string;
-  visualPlaceholderTitle: string;
-  visualPlaceholderSubtitle: string;
+  techStack: string[];
   images?: string[];
-};
+}
 
-const PROJECTS: ProjectCase[] = [
+const PROJECT_CONFIGS: ProjectMeta[] = [
   {
     id: "graphnext",
-    name: "سامانه فکر // تصویرسازی و تحلیل داده‌های حجیم",
     repoName: "MHgh0st/GraphNext",
-    category: "تحلیل داده، گراف‌های برداری و Visual Engine",
-    tagline:
-      "موتور پردازش و رندرینگ گراف‌های نودی و جریان داده با فشرده‌سازی باینری در فرانت‌اند و فریم‌ریت پایدار ۶۰FPS.",
-    overview:
-      "سامانه فکر یک زیرساخت مدرن فول‌استک برای پردازش فرآیند (Process Mining)، تحلیل ارتباطات شبکه‌ای و رندرینگ گراف‌های نودی پرحجم است. در این پروژه، سمت بک‌اند با پایتون و ابزارهای پرسرعت FastAPI، Polars و PostgreSQL برای استخراج ماتریس‌های گراف و مسیرهای فرآیند پیاده‌سازی شده و فرانت‌اند Next.js 16 از طریق پروتکل‌های باینری Apache Arrow، MsgPack و چیدمان موازی در Web Worker به رندری فوق‌العاده سریع و پایدار در ۶۰ فریم دست می‌یابد.",
-    architectureDetails:
-      "معماری فول‌استک داکرایز شده با Docker Compose: بک‌اند توسعه‌یافته با Python 3 (FastAPI)، فریم‌ورک Polars، درایورهای پرسرعت ConnectorX و PyArrow روی دیتابیس PostgreSQL. فرانت‌اند پیاده‌سازی شده با Next.js 16 (App Router) و React 19، تلفیق موتور چیدمان گرافیکی elkjs در Web Worker با @xyflow/react، دیاگرام‌های تعاملی جریان D3-Sankey و چارت‌های تحلیلی ApexCharts با معماری ایزوله Zustand.",
-    keyHighlights: [
-      "توسعه خط لوله پردازشی در بک‌اند پایتون با FastAPI و Polars جهت استخراج سریع گراف DFG و واریانت‌ها",
-      "محاسبه هندسی و چیدمان الگوریتمی موازی گراف با elkjs در محیط Web Worker بدون افت فریم UI",
-      "استریم و فشرده‌سازی باینری داده‌ها در سطح کلاینت و سرور با Apache Arrow، MsgPack و Zstandard",
-      "تصویرسازی شفاف جریان تراکنش‌ها و ارتباطات فرآیندی با استفاده از D3-Sankey",
-      "زیرساخت داکرایز شده کامل (Docker Compose) شامل سرویس‌های Frontend، Backend و PostgreSQL",
-    ],
+    githubUrl: "https://github.com/MHgh0st/GraphNext",
     techStack: [
       "Next.js 16",
       "React 19",
@@ -73,10 +48,6 @@ const PROJECTS: ProjectCase[] = [
       "elkjs (Web Worker)",
       "Zustand",
     ],
-    githubUrl: "https://github.com/MHgh0st/GraphNext",
-    visualPlaceholderTitle: "SAMANEH FEKR ENGINE WORKBENCH",
-    visualPlaceholderSubtitle:
-      "نمای تعاملی گراف‌های نودی، جریان‌های D3-Sankey و چارت‌های تحلیل فرآیندی",
     images: [
       "/Projects/GraphNext/1.png",
       "/Projects/GraphNext/2.png",
@@ -88,22 +59,9 @@ const PROJECTS: ProjectCase[] = [
   },
   {
     id: "ascvd",
-    name: "محاسبه‌گر تخصصی ریسک قلب و عروق ASCVD",
     repoName: "MHgh0st/ASCVD",
-    category: "سلامت دیجیتال، محاسبات بالینی و NextAuth",
-    tagline:
-      "وب‌اپلیکیشن ارزیابی ریسک ۱۰ ساله بیماری‌های قلبی عروقی بر مبنای گایدلاین‌های بالینی ACC/AHA و پایگاه داده ابری.",
-    overview:
-      "پروژه ASCVD یک سامانه بالینی دقیق برای تخمین احتمال ابتلا به بیماری‌های قلبی عروقی آترواسکلروتیک است. این وب‌اپلیکیشن فرمول‌های رگرسیون چندمتغیره پیچیده پزشکی را به فرم‌های مرحله‌به‌مرحله با اعتبارسنجی آنی متصل کرده و ضمن تحلیل متغیرهای بیمار (فشار خون، کلسترول، دیابت و سن)، تاریخچه تست‌ها را به صورت ساختاریافته ذخیره و توصیه‌های درمانی سفارشی تولید می‌کند.",
-    architectureDetails:
-      "توسعه‌یافته بر پایه Next.js 15 و React 19 با تایپ‌سیفتی کامل TypeScript 5 و فریم‌ورک HeroUI. اتصال امن به پایگاه داده PostgreSQL ابری روی Supabase از طریق Prisma ORM. مدیریت نشست‌ها و احراز هویت پیامکی با NextAuth.js، هشینگ پسورد با Bcrypt و رندرینگ نمودارهای گیج تحلیلی با React Gauge.",
-    keyHighlights: [
-      "پیاده‌سازی دقیق الگوریتم رگرسیون ACC/AHA 2013 با تفکیک ضرایب بر اساس جنسیت و متغیرهای بالینی",
-      "طراحی فرم‌های چندمرحله‌ای (Multi-step Form) هوشمند با اعتبارسنجی بلادرنگ داده‌های آزمایشگاهی",
-      "احراز هویت پیامکی و مدیریت سشن‌های ایمن کاربران با NextAuth.js و Prisma ORM",
-      "سیستم تحلیل خودکار و پیشنهاد گام‌های درمانی و اصلاح سبک زندگی بر اساس درصد ریسک خروجی",
-      "ذخیره‌سازی پرونده و پایش روند تغییرات ریسک بیمار در طول زمان روی Supabase PostgreSQL",
-    ],
+    githubUrl: "https://github.com/MHgh0st/ASCVD",
+    liveUrl: "https://ascvdupdates.vercel.app",
     techStack: [
       "TypeScript",
       "Next.js 15",
@@ -116,31 +74,12 @@ const PROJECTS: ProjectCase[] = [
       "Framer Motion",
       "React Gauge",
     ],
-    githubUrl: "https://github.com/MHgh0st/ASCVD",
-    liveUrl: "https://ascvdupdates.vercel.app",
-    visualPlaceholderTitle: "ASCVD CLINICAL DASHBOARD",
-    visualPlaceholderSubtitle:
-      "فرم‌های مرحله‌به‌مرحله ورود داده‌های آزمایشگاهی و گیج‌های سنجش ریسک بیمار",
     images: [],
   },
   {
     id: "salma-admin",
-    name: "پنل مدیریت برنامه‌های سلامت و مکمل‌های سلما",
     repoName: "MHgh0st/salma_admin_panel",
-    category: "دشبورد سازمانی، Next.js 16 و HeroUI v3",
-    tagline:
-      "سامانه جامع مدیریت و تخصیص ساختار برنامه‌ها (Plan Structure)، پروفایل بیماری‌ها، سیستم Q&A و مکمل‌های غذایی با React Compiler.",
-    overview:
-      "پروژه Salma Admin Panel یک دشبورد پیشرفته فرانت‌اند برای کادر درمانی و پزشکان است که امکان مدیریت ساختار پیچیده برنامه‌های سلامت، ایجاد رژیم‌ها و مکمل‌ها، تعریف بیماری‌ها و پاسخگویی به پرسش‌های بالینی کاربران را فراهم می‌کند. این سامانه با تمرکز بر پرفورمنس بالا، معماری ماژولار و لایه‌بندی شفاف کامپوننت‌ها در Next.js 16 پیاده‌سازی شده است.",
-    architectureDetails:
-      "توسعه‌یافته با Next.js 16.2 و React 19.2 با کامپایلر بهینه‌ساز React Compiler و استایل‌های نوین Tailwind CSS v4. بهره‌گیری از HeroUI v3 و ماژول جدید @heroui/styles، آیکون‌های بهینه‌شده Solar Icons، انیمیشن‌های روان با Motion و مدیریت وضعیت فرم‌ها و استیت‌های سراسری با Zustand.",
-    keyHighlights: [
-      "معماری ماژولار با بیش از ۳۶ کیلوبایت سورس‌کد ساختاری در لایه‌های Forms, Store و Layouts",
-      "سیستم مدیریت و تفکیک ساختار برنامه‌ها (Plan Structure) و تخصیص هوشمند مکمل‌ها",
-      "طراحی کامپوننت‌های پایه و مشترک CRUD (جداول داده، هدر صفحات و اکشن‌های سطری)",
-      "استفاده از سیستم دیزاین مدرن HeroUI v3 در کنار کامپایلر رسمی React 19 برای رندرینگ سریع",
-      "استیت منیجمنت پایدار و تفکیک‌شده با Zustand و هماهنگی تم تاریک/روشن با next-themes",
-    ],
+    githubUrl: "https://github.com/MHgh0st/salma_admin_panel",
     techStack: [
       "TypeScript",
       "Next.js 16.2",
@@ -152,30 +91,12 @@ const PROJECTS: ProjectCase[] = [
       "Zustand",
       "Solar Icons",
     ],
-    githubUrl: "https://github.com/MHgh0st/salma_admin_panel",
-    visualPlaceholderTitle: "SALMA HEALTH ADMIN PANEL",
-    visualPlaceholderSubtitle:
-      "پنل مدیریت برنامه‌ها، سیستم تخصیص مکمل‌ها، فرم‌های بالینی و دشبورد سلامت",
     images: [],
   },
   {
     id: "salma-app",
-    name: "اپلیکیشن نیتیو مدیریت سلامت و سبک زندگی سلما",
     repoName: "MHgh0st/Salma_app",
-    category: "موبایل کراس‌پلتفرم، React Native و HeroUI Native",
-    tagline:
-      "اپلیکیشن موبایل پیشرفته با معماری Expo 57، انیمیشن‌های ۶۰ فریم Reanimated 4 و رندرینگ گرافیکی Skia.",
-    overview:
-      "پروژه Salma App یک اپلیکیشن جامع نیتیو برای مدیریت سلامت فردی، برنامه‌های پزشکی، پایش تغذیه و تمرینات ورزشی است. این پروژه بر پایه جدیدترین استاندارد‌های React Native و اکوسیستم مدرن Expo Router توسعه یافته است. استفاده از موتور گرافیکی Shopify Skia در کنار HeroUI Native و سیستم استایلینگ Uniwind، رابط کاربری فوق‌العاده نرم، تعاملی و پرفورمنسی هم‌تراز با اپ‌های بومی خلق کرده است.",
-    architectureDetails:
-      "توسعه‌یافته با React Native 0.86 و React 19 بر بستر Expo SDK 57 (New Architecture). بهره‌گیری از HeroUI Native و Uniwind (Tailwind CSS برای ری‌اکت نیتیو)، انیمیشن‌های روان ۶۰ فریم با React Native Reanimated 4 و Gesture Handler، دراورهای شناور @gorhom/bottom-sheet، کشینگ و همگام‌سازی سرور با TanStack Query v5 و مدیریت وضعیت با Zustand.",
-    keyHighlights: [
-      "معماری ماژولار مبتنی بر Expo Router v57 و فایل‌بیس با Type Safety سخت‌گیرانه",
-      "رندرهای گرافیکی پیشرفته با Shopify Skia و افکت‌های بلور بلادرنگ نیتیو",
-      "استفاده از سیستم دیزاین HeroUI Native و Uniwind جهت یکپارچگی استایل‌ها با Tailwind",
-      "تعاملات gesture و دراورهای شیشه‌ای روان با @gorhom/bottom-sheet و Reanimated",
-      "مدیریت کش هوشمند و واکشی بهینه داده‌های آنلاین/آفلاین با TanStack Query و Zustand",
-    ],
+    githubUrl: "https://github.com/MHgh0st/Salma_app",
     techStack: [
       "React Native 0.86",
       "React 19",
@@ -188,30 +109,12 @@ const PROJECTS: ProjectCase[] = [
       "TanStack Query",
       "Zustand",
     ],
-    githubUrl: "https://github.com/MHgh0st/Salma_app",
-    visualPlaceholderTitle: "SALMA NATIVE MOBILE APP",
-    visualPlaceholderSubtitle:
-      "رابط کاربری نیتیو موبایل، باتم‌شیت‌های تعاملی، پلن‌های سلامتی و کامپوننت‌های Skia",
     images: [],
   },
   {
     id: "ticketing-system",
-    name: "سامانه تیکتینگ و پشتیبانی سازمانی",
     repoName: "MHgh0st/ticketing-system",
-    category: "معماری سازمانی، Nuxt 3 و دیزاین سیستم اختصاصی",
-    tagline:
-      "پلتفرم مدیریت تیکت و گفتگوی لایو شرکتی با کامپوننت‌های ۱۰۰٪ دست‌ساز بدون استفاده از پکیج‌های آماده UI.",
-    overview:
-      "این پروژه یک سامانه جامع ثبت و پیگیری تیکت‌های شرکتی است که فرانت‌اند آن از صفر به صورت کاملاً ماژولار پیاده‌سازی شده است. ویژگی برجسته فنی این پروژه، عدم استفاده از کتابخانه‌های متفرقه و آماده UI و خلق دستی تمام کامپوننت‌ها (حباب‌های چت پیام‌رسان با تفکیک پشتیبان/کاربر، دراورها، مودال‌ها، جداول داده با صفحه‌بندی هوشمند و سیستم لاگین دوگانه) جهت دستیابی به کمترین وزن باندل و بالاترین سرعت رندر بوده است.",
-    architectureDetails:
-      "طراحی شده با Vue 3 و Nuxt.js با معماری کامپوننت‌محور و استایل‌دهی ماژولار Tailwind CSS. سیستم احراز هویت دوطرفه (لاگین سنتی نام‌کاربری/رمزعبور + ورود بدون رمز OTP پیامکی)، معماری روتینگ داینامیک برای ردگیری وضعیت تیکت‌ها (`system/ticket/:id`) و قابلیت تفکیک نقش‌های دسترسی کاربران.",
-    keyHighlights: [
-      "توسعه ۱۰۰٪ دست‌ساز دیزاین‌سیستم و کامپوننت‌های Reusable بدون هیچ‌گونه وابستگی به پکیج‌های UI",
-      "طراحی کامپوننت حباب‌های گفتگو (Chat Bubble UI) با تایم‌استمپ دقیق و مدیریت انواع پیام‌ها",
-      "داشبورد مدیریت تیکت‌ها با سیستم فیلترینگ چندسطحی، جستجوی بلادرنگ و صفحه‌بندی (Pagination) بهینه",
-      "احراز هویت منعطف با پشتیبانی همزمان از ورود با کلمه‌عبور و ارسال کد یکبار مصرف (OTP)",
-      "ساختار روتینگ داینامیک و تمیز برای مدیریت چرخه عمر تیکت‌ها از ثبت تا پاسخگویی و بستن تیکت",
-    ],
+    githubUrl: "https://github.com/MHgh0st/ticketing-system",
     techStack: [
       "Vue.js 3",
       "Nuxt.js",
@@ -221,58 +124,89 @@ const PROJECTS: ProjectCase[] = [
       "REST API Services",
       "Dynamic Routing",
     ],
-    githubUrl: "https://github.com/MHgh0st/ticketing-system",
-    visualPlaceholderTitle: "ENTERPRISE TICKETING & CHAT SYSTEM",
-    visualPlaceholderSubtitle:
-      "رابط کاربری حباب‌های گفتگوی پشتیبانی، جداول پایش وضعیت و داشبورد تیکت‌ها",
     images: [],
   },
 ];
 
 export function CaseStudiesSection() {
+  const t = useTranslations("CaseStudies");
+  const commonT = useTranslations("Common");
+  const cursorT = useTranslations("Cursor");
+  const locale = useLocale();
+  const isRtl = locale === "fa";
+
   const containerRef = useRef<HTMLDivElement>(null);
   const detailPanelRef = useRef<HTMLDivElement>(null);
   const { openImage } = useLightbox();
-  const [selectedProject, setSelectedProject] = useState<ProjectCase>(
-    PROJECTS[0],
+
+  const [selectedProjectId, setSelectedProjectId] = useState<string>(
+    PROJECT_CONFIGS[0].id
   );
   const [activeTab, setActiveTab] = useState<
-    "overview" | "architecture font-mono" | "visuals"
+    "overview" | "architecture" | "visuals"
   >("overview");
-  const [expandedProject, setExpandedProject] = useState<ProjectCase | null>(
-    null,
-  );
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
 
-  // Reset slide index when selected project changes
-  useEffect(() => {
+  const selectedConfig =
+    PROJECT_CONFIGS.find((p) => p.id === selectedProjectId) || PROJECT_CONFIGS[0];
+
+  const selectedProject = {
+    ...selectedConfig,
+    name: t(`projects.${selectedConfig.id}.name`),
+    category: t(`projects.${selectedConfig.id}.category`),
+    tagline: t(`projects.${selectedConfig.id}.tagline`),
+    overview: t(`projects.${selectedConfig.id}.overview`),
+    architectureDetails: t(`projects.${selectedConfig.id}.architectureDetails`),
+    keyHighlights: t.raw(`projects.${selectedConfig.id}.keyHighlights`) as string[],
+    visualPlaceholderSubtitle: t(`projects.${selectedConfig.id}.visualPlaceholderSubtitle`),
+  };
+
+  const handleSelectProject = (projectId: string) => {
+    setSelectedProjectId(projectId);
     setCurrentSlideIndex(0);
-  }, [selectedProject.id]);
 
-  const handleSelectProject = (project: ProjectCase) => {
-    setSelectedProject(project);
-
-    // If mobile viewport, smoothly scroll to detail panel
+    // Smooth scroll to detail panel on small viewports
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setTimeout(() => {
-        detailPanelRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 100);
+        if (detailPanelRef.current) {
+          const top =
+            detailPanelRef.current.getBoundingClientRect().top +
+            window.scrollY -
+            64;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 50);
     }
   };
 
   const handleNextSlide = () => {
-    if (!selectedProject.images || selectedProject.images.length === 0) return;
-    setCurrentSlideIndex((prev) => (prev + 1) % selectedProject.images!.length);
+    if (!selectedConfig.images || selectedConfig.images.length === 0) return;
+    setCurrentSlideIndex((prev) => (prev + 1) % selectedConfig.images!.length);
   };
 
   const handlePrevSlide = () => {
-    if (!selectedProject.images || selectedProject.images.length === 0) return;
+    if (!selectedConfig.images || selectedConfig.images.length === 0) return;
     setCurrentSlideIndex((prev) =>
-      prev === 0 ? selectedProject.images!.length - 1 : prev - 1,
+      prev === 0 ? selectedConfig.images!.length - 1 : prev - 1
     );
+  };
+
+  // Touch Swipe Handler with Direction Awareness
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
+    const swipeThreshold = 40;
+    if (isRtl) {
+      if (info.offset.x > swipeThreshold) {
+        handlePrevSlide();
+      } else if (info.offset.x < -swipeThreshold) {
+        handleNextSlide();
+      }
+    } else {
+      if (info.offset.x < -swipeThreshold) {
+        handleNextSlide();
+      } else if (info.offset.x > swipeThreshold) {
+        handlePrevSlide();
+      }
+    }
   };
 
   const { scrollYProgress } = useScroll({
@@ -280,11 +214,14 @@ export function CaseStudiesSection() {
     offset: ["start end", "end start"],
   });
 
+  const PrevIcon = isRtl ? ChevronRight : ChevronLeft;
+  const NextIcon = isRtl ? ChevronLeft : ChevronRight;
+
   return (
     <section
       ref={containerRef}
       id="projects"
-      className="py-16 sm:py-24 border-b border-[#111111] bg-[#f4f3ef] relative select-none"
+      className="py-12 sm:py-20 border-b border-[#111111] dark:border-[#2b3038] bg-[#f4f3ef] dark:bg-[#0c0d0e] relative"
     >
       {/* Section-Integrated Geometry Component */}
       <SectionGeometry
@@ -294,174 +231,181 @@ export function CaseStudiesSection() {
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="mb-12 border-b border-[#111111] pb-6 flex flex-wrap items-end justify-between gap-4 bg-[#f4f3ef] p-5 border-2 border-[#111111] shadow-[4px_4px_0px_#111111]">
+        <div className="mb-8 sm:mb-12 border-b border-[#111111] dark:border-[#2b3038] pb-4 sm:pb-6 flex flex-wrap items-end justify-between gap-4 bg-[#f4f3ef] dark:bg-[#141618] p-4 sm:p-5 border-2 border-[#111111] dark:border-[#2b3038] shadow-[4px_4px_0px_#111111] dark:shadow-[4px_4px_0px_#0047ff]">
           <div>
-            <div className="text-xs font-bold text-[#0047ff] uppercase tracking-wider mb-2 flex items-center gap-2 font-mono">
+            <div className="text-xs font-bold text-[#0047ff] dark:text-[#d4ff00] uppercase tracking-wider mb-2 flex items-center gap-2 font-mono">
               <Layers className="w-4 h-4 text-[#ff3b00]" />
-              <span>[بخش ۰۱ // پروژه‌ها و مهندسی سورس‌کد]</span>
+              <span>{t("eyebrow")}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#111111] tracking-tight uppercase">
-              پروژه‌های شاخص و معماری‌های واقعی
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#111111] dark:text-[#f2f1ec] tracking-tight uppercase">
+              {t("heading")}
             </h2>
           </div>
-          <div className="font-mono text-xs text-[#555555]">
-            GITHUB_REPOSITORIES // VERIFIED_CODE
+          <div className="font-mono text-xs text-[#555555] dark:text-[#9fa4ab]">
+            {t("stamp")}
           </div>
         </div>
 
-        {/* Grid Layout: Right Project Selection Cards, Left Deep-Dive Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Right (RTL Start): Interactive Directional Project Cards */}
-          <div className="lg:col-span-5 space-y-4">
-            {PROJECTS.map((project) => {
-              const isSelected = selectedProject.id === project.id;
+        {/* Grid Layout: Selection Column (Start) & Deep-Dive Panel (End) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Project Selection Cards (Start) */}
+          <div className="lg:col-span-5 space-y-3 sm:space-y-4">
+            <div className="text-xs font-mono font-bold text-[#555555] dark:text-[#9fa4ab] px-1 flex items-center justify-between">
+              <span>{t("listHeader")}</span>
+              <span className="text-[#0047ff] dark:text-[#d4ff00] text-[11px]">{t("listHint")}</span>
+            </div>
+
+            {PROJECT_CONFIGS.map((config) => {
+              const isSelected = selectedProjectId === config.id;
+              const name = t(`projects.${config.id}.name`);
+              const category = t(`projects.${config.id}.category`);
+              const tagline = t(`projects.${config.id}.tagline`);
+
               return (
                 <motion.div
-                  key={project.id}
-                  layoutId={`card-container-${project.id}`}
-                  onClick={() => handleSelectProject(project)}
+                  key={config.id}
+                  onClick={() => handleSelectProject(config.id)}
                   data-cursor="project"
-                  data-cursor-label="INSPECT"
-                  whileHover={{ x: -4 }}
+                  data-cursor-label={cursorT("inspect")}
+                  whileHover={{ x: isRtl ? -4 : 4 }}
+                  whileTap={{ scale: 0.99 }}
                   transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                  className={`w-full text-right p-5 border-2 transition-all cursor-pointer relative group overflow-hidden ${
+                  className={`w-full text-start p-4 sm:p-5 border-2 transition-all cursor-pointer relative group overflow-hidden ${
                     isSelected
-                      ? "bg-[#111111] text-[#f4f3ef] border-[#111111] shadow-[6px_6px_0px_#0047ff]"
-                      : "bg-[#f4f3ef] text-[#111111] border-[#111111] shadow-[3px_3px_0px_#111111] hover:shadow-[6px_6px_0px_#111111] hover:bg-[#e9e7e1]"
+                      ? "bg-[#111111] dark:bg-[#0047ff] text-[#f4f3ef] dark:text-[#ffffff] border-[#111111] dark:border-[#2b3038] shadow-[5px_5px_0px_#0047ff] dark:shadow-[5px_5px_0px_#d4ff00]"
+                      : "bg-[#f4f3ef] dark:bg-[#141618] text-[#111111] dark:text-[#f2f1ec] border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#111111] dark:shadow-[3px_3px_0px_#0047ff] hover:shadow-[5px_5px_0px_#111111] hover:bg-[#e9e7e1] dark:hover:bg-[#1b1e22] active:shadow-[1px_1px_0px_#111111]"
                   }`}
                 >
                   {/* Directional Accent Clip Reveal */}
                   <div
-                    className={`absolute inset-y-0 right-0 w-2.5 transition-transform duration-300 ${
+                    className={`absolute inset-y-0 start-0 w-2.5 transition-transform duration-300 ${
                       isSelected
                         ? "bg-[#d4ff00] scale-y-100"
-                        : "bg-[#0047ff] scale-y-0 group-hover:scale-y-100"
+                        : "bg-[#0047ff] dark:bg-[#d4ff00] scale-y-0 group-hover:scale-y-100"
                     }`}
                   />
 
-                  <div className="flex items-center justify-between mb-2 pr-2">
+                  <div className="flex items-center justify-between mb-2 ps-2">
                     <span
-                      className={`text-xs font-bold uppercase tracking-wider ${isSelected ? "text-[#d4ff00]" : "text-[#0047ff]"}`}
+                      className={`text-xs font-bold uppercase tracking-wider ${
+                        isSelected
+                          ? "text-[#d4ff00] dark:text-[#d4ff00]"
+                          : "text-[#0047ff] dark:text-[#3b82f6]"
+                      }`}
                     >
-                      {project.category}
+                      {category}
                     </span>
 
-                    {/* Viewport Takeover Button */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setExpandedProject(project);
-                      }}
-                      data-cursor="interactive"
-                      data-cursor-label="TAKEOVER"
-                      className={`p-1.5 border transition-all ${
+                    <span
+                      className={`font-mono text-[11px] px-2 py-0.5 border ${
                         isSelected
-                          ? "border-[#d4ff00] text-[#d4ff00] hover:bg-[#d4ff00] hover:text-[#111111]"
-                          : "border-[#111111] text-[#111111] hover:bg-[#0047ff] hover:text-[#f4f3ef]"
+                          ? "bg-[#0047ff] dark:bg-[#111111] text-[#f4f3ef] dark:text-[#d4ff00] border-[#0047ff] dark:border-[#2b3038]"
+                          : "bg-[#e9e7e1] dark:bg-[#1b1e22] text-[#111111] dark:text-[#f2f1ec] border-[#111111] dark:border-[#2b3038]"
                       }`}
-                      title="مشاهده کامل و Takeover نمای کلی"
                     >
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </button>
+                      {isSelected ? t("statusSelected") : t("statusInspect")}
+                    </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-black tracking-tight mb-2 pr-2 group-hover:text-[#0047ff] transition-colors">
-                    {project.name}
+                  <h3 className="text-base sm:text-lg font-black tracking-tight mb-2 ps-2 group-hover:text-[#0047ff] dark:group-hover:text-[#d4ff00] transition-colors">
+                    {name}
                   </h3>
                   <p
-                    className={`text-xs leading-relaxed line-clamp-2 pr-2 ${isSelected ? "text-[#cccccc]" : "text-[#555555]"}`}
+                    className={`text-xs leading-relaxed line-clamp-2 ps-2 ${
+                      isSelected ? "text-[#cccccc] dark:text-[#e0e7ff]" : "text-[#555555] dark:text-[#9fa4ab]"
+                    }`}
                   >
-                    {project.tagline}
+                    {tagline}
                   </p>
                 </motion.div>
               );
             })}
           </div>
 
-          {/* Left (RTL End): Case Study Deep-Dive Panel with Motion Reveal */}
+          {/* Case Study Deep-Dive Panel (End) */}
           <div
             ref={detailPanelRef}
-            className="lg:col-span-7 bg-[#f4f3ef] border-2 border-[#111111] shadow-[8px_8px_0px_#111111] overflow-hidden scroll-mt-20"
+            className="lg:col-span-7 bg-[#f4f3ef] dark:bg-[#141618] border-2 border-[#111111] dark:border-[#2b3038] shadow-[6px_6px_0px_#111111] dark:shadow-[6px_6px_0px_#0047ff] sm:shadow-[8px_8px_0px_#111111] sm:dark:shadow-[8px_8px_0px_#0047ff] overflow-hidden scroll-mt-20"
           >
-            {/* Panel Titlebar & Tab Switcher */}
-            <div className="px-5 py-3.5 bg-[#111111] text-[#f4f3ef] flex flex-wrap items-center justify-between gap-4 text-xs font-bold border-b-2 border-[#111111]">
-              <div className="flex items-center gap-2.5 font-mono">
-                <span className="w-2.5 h-2.5 bg-[#d4ff00] animate-pulse" />
-                <GitBranch className="w-4 h-4 text-[#0047ff]" />
-                <span className="text-[#f4f3ef] tracking-wide">
+            {/* Panel Titlebar & Tabs */}
+            <div className="p-3.5 sm:px-5 sm:py-3.5 bg-[#111111] dark:bg-[#070809] text-[#f4f3ef] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b-2 border-[#111111] dark:border-[#2b3038]">
+              <div className="flex items-center gap-2.5 font-mono text-xs">
+                <span className="w-2.5 h-2.5 bg-[#d4ff00] animate-pulse shrink-0" />
+                <GitBranch className="w-4 h-4 text-[#0047ff] dark:text-[#d4ff00] shrink-0" />
+                <span className="text-[#f4f3ef] font-bold tracking-wide truncate">
                   {selectedProject.repoName}
                 </span>
               </div>
 
-              {/* Tabs */}
-              <div className="flex items-center bg-[#222222] p-1 border border-[#444444] gap-1">
+              {/* Horizontal Scrollable Tab Bar */}
+              <div className="flex items-center bg-[#222222] dark:bg-[#141618] p-1 border border-[#444444] dark:border-[#2b3038] gap-1 overflow-x-auto scrollbar-none">
                 <button
                   onClick={() => setActiveTab("overview")}
-                  className={`px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
+                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer shrink-0 ${
                     activeTab === "overview"
                       ? "bg-[#0047ff] text-[#f4f3ef] shadow-[2px_2px_0px_#d4ff00]"
-                      : "text-[#cccccc] hover:text-[#f4f3ef] hover:bg-[#333333]"
+                      : "text-[#cccccc] hover:text-[#f4f3ef] hover:bg-[#333333] dark:hover:bg-[#1b1e22]"
                   }`}
                 >
-                  چکیده و دستاوردها
+                  {t("tabs.overview")}
                 </button>
                 <button
-                  onClick={() => setActiveTab("architecture font-mono")}
-                  className={`px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
-                    activeTab === "architecture font-mono"
+                  onClick={() => setActiveTab("architecture")}
+                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer shrink-0 font-mono ${
+                    activeTab === "architecture"
                       ? "bg-[#0047ff] text-[#f4f3ef] shadow-[2px_2px_0px_#d4ff00]"
-                      : "text-[#cccccc] hover:text-[#f4f3ef] hover:bg-[#333333]"
+                      : "text-[#cccccc] hover:text-[#f4f3ef] hover:bg-[#333333] dark:hover:bg-[#1b1e22]"
                   }`}
                 >
-                  معماری و تک‌استک
+                  {t("tabs.architecture")}
                 </button>
                 <button
                   onClick={() => setActiveTab("visuals")}
-                  className={`px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
+                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer shrink-0 ${
                     activeTab === "visuals"
                       ? "bg-[#0047ff] text-[#f4f3ef] shadow-[2px_2px_0px_#d4ff00]"
-                      : "text-[#cccccc] hover:text-[#f4f3ef] hover:bg-[#333333]"
+                      : "text-[#cccccc] hover:text-[#f4f3ef] hover:bg-[#333333] dark:hover:bg-[#1b1e22]"
                   }`}
                 >
-                  پیش‌نمایش سیستم
+                  {t("tabs.visuals")}
                 </button>
               </div>
             </div>
 
-            {/* Panel Body Content with AnimatePresence/Motion Reveal */}
+            {/* Panel Body Content */}
             <motion.div
               key={`${selectedProject.id}-${activeTab}`}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="p-6 space-y-6 min-h-[380px]"
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="p-4 sm:p-6 space-y-6 min-h-[360px]"
             >
               {/* Content Tab: Overview & Features */}
               {activeTab === "overview" && (
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-[#0047ff] uppercase mb-2">
-                      // هدف و کارکرد اصلی پروژه
+                    <h4 className="text-xs font-mono font-bold text-[#0047ff] dark:text-[#d4ff00] uppercase mb-2">
+                      {t("overviewHeading")}
                     </h4>
-                    <p className="text-sm font-semibold text-[#111111] leading-relaxed p-4 bg-[#e9e7e1] border border-[#111111]">
+                    <p className="text-xs sm:text-sm font-semibold text-[#111111] dark:text-[#f2f1ec] leading-relaxed p-3.5 sm:p-4 bg-[#e9e7e1] dark:bg-[#1b1e22] border border-[#111111] dark:border-[#2b3038]">
                       {selectedProject.overview}
                     </p>
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-[#0047ff] uppercase mb-3">
-                      // دستاوردها و فیچرهای شاخص
+                    <h4 className="text-xs font-mono font-bold text-[#0047ff] dark:text-[#d4ff00] uppercase mb-3">
+                      {t("highlightsHeading")}
                     </h4>
-                    <ul className="space-y-2.5 text-xs text-[#111111]">
+                    <ul className="space-y-2.5 text-xs text-[#111111] dark:text-[#f2f1ec]">
                       {selectedProject.keyHighlights.map((highlight, idx) => (
                         <motion.li
                           key={idx}
-                          initial={{ opacity: 0, x: 10 }}
+                          initial={{ opacity: 0, x: isRtl ? 8 : -8 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.05 }}
-                          className="flex items-start gap-2.5 p-3 bg-[#e9e7e1] border border-[#111111] hover:border-[#0047ff] transition-colors"
+                          transition={{ delay: idx * 0.04 }}
+                          className="flex items-start gap-2.5 p-3 bg-[#e9e7e1] dark:bg-[#1b1e22] border border-[#111111] dark:border-[#2b3038] hover:border-[#0047ff] dark:hover:border-[#d4ff00] transition-colors"
                         >
-                          <CheckCircle className="w-4 h-4 text-[#0047ff] shrink-0 mt-0.5" />
+                          <CheckCircle className="w-4 h-4 text-[#0047ff] dark:text-[#d4ff00] shrink-0 mt-0.5" />
                           <span className="font-bold leading-relaxed">
                             {highlight}
                           </span>
@@ -473,26 +417,26 @@ export function CaseStudiesSection() {
               )}
 
               {/* Content Tab: Architecture & Tech Stack */}
-              {activeTab === "architecture font-mono" && (
+              {activeTab === "architecture" && (
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-[#0047ff] uppercase mb-2">
-                      // معماری فرانت‌اند و لایه‌بندی سیستم
+                    <h4 className="text-xs font-mono font-bold text-[#0047ff] dark:text-[#d4ff00] uppercase mb-2">
+                      {t("architectureHeading")}
                     </h4>
-                    <p className="text-sm font-semibold text-[#111111] leading-relaxed p-4 bg-[#e9e7e1] border border-[#111111]">
+                    <p className="text-xs sm:text-sm font-semibold text-[#111111] dark:text-[#f2f1ec] leading-relaxed p-3.5 sm:p-4 bg-[#e9e7e1] dark:bg-[#1b1e22] border border-[#111111] dark:border-[#2b3038]">
                       {selectedProject.architectureDetails}
                     </p>
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono font-bold text-[#0047ff] uppercase mb-2">
-                      // پشته ابزارها و وابستگی‌های مهندسی (Tech Stack)
+                    <h4 className="text-xs font-mono font-bold text-[#0047ff] dark:text-[#d4ff00] uppercase mb-2">
+                      {t("techStackHeading")}
                     </h4>
                     <div className="flex flex-wrap gap-2 text-xs font-mono">
                       {selectedProject.techStack.map((tech, idx) => (
                         <span
                           key={idx}
-                          className="px-3.5 py-1.5 bg-[#111111] text-[#f4f3ef] border border-[#111111] font-bold shadow-[2px_2px_0px_#0047ff]"
+                          className="px-3 py-1.5 bg-[#111111] dark:bg-[#1b1e22] text-[#f4f3ef] dark:text-[#d4ff00] border border-[#111111] dark:border-[#2b3038] font-bold shadow-[2px_2px_0px_#0047ff]"
                         >
                           {tech}
                         </span>
@@ -505,16 +449,16 @@ export function CaseStudiesSection() {
               {/* Content Tab: Visual Showcase */}
               {activeTab === "visuals" && (
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-mono text-[#555555]">
+                  <div className="flex items-center justify-between text-xs font-mono text-[#555555] dark:text-[#9fa4ab]">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-[#0047ff]" />
+                      <span className="w-2 h-2 bg-[#0047ff] dark:bg-[#d4ff00]" />
                       <span className="font-bold">
-                        VISUAL_SHOWCASE // SLIDESHOW VIEW
+                        {t("visualsHeading")}
                       </span>
                     </div>
                     {selectedProject.images &&
                       selectedProject.images.length > 0 && (
-                        <span className="bg-[#111111] text-[#d4ff00] px-2.5 py-0.5 font-mono font-bold border border-[#111111]">
+                        <span className="bg-[#111111] dark:bg-[#070809] text-[#d4ff00] px-2.5 py-0.5 font-mono font-bold border border-[#111111] dark:border-[#2b3038]">
                           {currentSlideIndex + 1} /{" "}
                           {selectedProject.images.length}
                         </span>
@@ -524,59 +468,61 @@ export function CaseStudiesSection() {
                   {selectedProject.images &&
                   selectedProject.images.length > 0 ? (
                     <div className="space-y-3">
-                      {/* Main Carousel Screen Frame */}
-                      <div
+                      {/* Main Touch-Swipable Frame */}
+                      <motion.div
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.2}
+                        onDragEnd={handleDragEnd}
                         onClick={() =>
                           openImage({
                             src: selectedProject.images![currentSlideIndex],
-                            title: `${selectedProject.name} — تصویر ۰${currentSlideIndex + 1}`,
+                            title: `${selectedProject.name} — [${currentSlideIndex + 1}]`,
                             alt: selectedProject.name,
                           })
                         }
-                        className="relative w-full aspect-video border-2 border-[#111111] overflow-hidden bg-[#111111] shadow-[6px_6px_0px_#111111] group cursor-zoom-in"
-                        title="برای مشاهده سایز کامل و بزرگ کلیک کنید"
+                        className="relative w-full aspect-video border-2 border-[#111111] dark:border-[#2b3038] overflow-hidden bg-[#111111] dark:bg-[#070809] shadow-[6px_6px_0px_#111111] dark:shadow-[6px_6px_0px_#0047ff] group cursor-pointer touch-pan-y"
+                        title={t("zoomTooltip")}
                       >
                         <AnimatePresence mode="wait">
                           <motion.div
                             key={currentSlideIndex}
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: isRtl ? 20 : -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
+                            exit={{ opacity: 0, x: isRtl ? -20 : 20 }}
                             transition={{ duration: 0.25, ease: "easeInOut" }}
-                            className="relative w-full h-full"
+                            className="relative w-full h-full pointer-events-none"
                           >
                             <Image
                               src={selectedProject.images[currentSlideIndex]}
                               alt={`${selectedProject.name} slide ${currentSlideIndex + 1}`}
                               fill
-                              className="object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                              className="object-contain"
                               priority
                             />
                           </motion.div>
                         </AnimatePresence>
 
-                        {/* Top-Right Badge Overlay with Zoom Trigger */}
-                        <div className="absolute top-3 right-3 z-20 flex items-center gap-2">
-                          <div className="bg-[#111111]/90 text-[#f4f3ef] text-[10px] font-mono font-bold px-2 py-1 border border-[#f4f3ef]/30 backdrop-blur-sm flex items-center gap-1.5 group-hover:bg-[#0047ff] transition-colors">
+                        {/* Top End Badge Overlay with Zoom Trigger */}
+                        <div className="absolute top-2.5 end-2.5 z-20 flex items-center gap-2">
+                          <div className="bg-[#111111]/90 dark:bg-[#070809]/90 text-[#f4f3ef] text-[10px] font-mono font-bold px-2 py-1 border border-[#f4f3ef]/30 backdrop-blur-sm flex items-center gap-1.5 group-hover:bg-[#0047ff] transition-colors">
                             <ZoomIn className="w-3 h-3 text-[#d4ff00]" />
-                            <span>بزرگ‌نمایی</span>
+                            <span>{commonT("zoom")}</span>
                           </div>
                         </div>
 
-                        {/* Left & Right Prev/Next Overlay Buttons */}
+                        {/* Prev/Next Overlay Buttons */}
                         {selectedProject.images.length > 1 && (
-                          <div className="absolute inset-y-0 inset-x-0 flex items-center justify-between px-3 pointer-events-none z-20">
+                          <div className="absolute inset-y-0 inset-x-0 flex items-center justify-between px-2 sm:px-3 pointer-events-none z-20">
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handlePrevSlide();
                               }}
-                              data-cursor="interactive"
-                              data-cursor-label="PREV"
-                              className="pointer-events-auto w-10 h-10 bg-[#f4f3ef] hover:bg-[#0047ff] text-[#111111] hover:text-[#f4f3ef] border-2 border-[#111111] shadow-[3px_3px_0px_#111111] flex items-center justify-center transition-all cursor-pointer"
-                              title="اسلاید قبلی"
+                              aria-label={commonT("prevSlide")}
+                              className="pointer-events-auto w-11 h-11 bg-[#f4f3ef] dark:bg-[#141618] hover:bg-[#0047ff] text-[#111111] dark:text-[#f2f1ec] hover:text-[#f4f3ef] border-2 border-[#111111] dark:border-[#2b3038] shadow-[2px_2px_0px_#111111] dark:shadow-[2px_2px_0px_#0047ff] active:translate-y-0.5 flex items-center justify-center transition-all cursor-pointer"
                             >
-                              <ChevronRight className="w-5 h-5" />
+                              <PrevIcon className="w-5 h-5" />
                             </button>
 
                             <button
@@ -584,28 +530,26 @@ export function CaseStudiesSection() {
                                 e.stopPropagation();
                                 handleNextSlide();
                               }}
-                              data-cursor="interactive"
-                              data-cursor-label="NEXT"
-                              className="pointer-events-auto w-10 h-10 bg-[#f4f3ef] hover:bg-[#0047ff] text-[#111111] hover:text-[#f4f3ef] border-2 border-[#111111] shadow-[3px_3px_0px_#111111] flex items-center justify-center transition-all cursor-pointer"
-                              title="اسلاید بعدی"
+                              aria-label={commonT("nextSlide")}
+                              className="pointer-events-auto w-11 h-11 bg-[#f4f3ef] dark:bg-[#141618] hover:bg-[#0047ff] text-[#111111] dark:text-[#f2f1ec] hover:text-[#f4f3ef] border-2 border-[#111111] dark:border-[#2b3038] shadow-[2px_2px_0px_#111111] dark:shadow-[2px_2px_0px_#0047ff] active:translate-y-0.5 flex items-center justify-center transition-all cursor-pointer"
                             >
-                              <ChevronLeft className="w-5 h-5" />
+                              <NextIcon className="w-5 h-5" />
                             </button>
                           </div>
                         )}
-                      </div>
+                      </motion.div>
 
-                      {/* Thumbnail Strip for Direct Navigation */}
+                      {/* Thumbnail Strip */}
                       {selectedProject.images.length > 1 && (
-                        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 scrollbar-none">
                           {selectedProject.images.map((imgSrc, idx) => (
                             <button
                               key={idx}
                               onClick={() => setCurrentSlideIndex(idx)}
-                              className={`relative w-20 sm:w-24 aspect-video border-2 transition-all cursor-pointer shrink-0 overflow-hidden ${
+                              className={`relative min-w-[72px] sm:min-w-[88px] aspect-video border-2 transition-all cursor-pointer shrink-0 overflow-hidden ${
                                 currentSlideIndex === idx
-                                  ? "border-[#0047ff] ring-2 ring-[#0047ff] shadow-[2px_2px_0px_#111111] scale-105"
-                                  : "border-[#111111] opacity-60 hover:opacity-100"
+                                  ? "border-[#0047ff] dark:border-[#d4ff00] ring-2 ring-[#0047ff] dark:ring-[#d4ff00] shadow-[2px_2px_0px_#111111] scale-105"
+                                  : "border-[#111111] dark:border-[#2b3038] opacity-60 hover:opacity-100"
                               }`}
                             >
                               <Image
@@ -620,48 +564,45 @@ export function CaseStudiesSection() {
                       )}
                     </div>
                   ) : (
-                    <div className="w-full aspect-video border-2 border-[#111111] bg-[#e9e7e1] p-6 flex flex-col justify-between relative overflow-hidden group shadow-[6px_6px_0px_#111111]">
+                    <div className="w-full aspect-video border-2 border-[#111111] dark:border-[#2b3038] bg-[#e9e7e1] dark:bg-[#1b1e22] p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden group shadow-[6px_6px_0px_#111111] dark:shadow-[6px_6px_0px_#0047ff]">
                       <div className="absolute inset-0 bg-swiss-grid opacity-40 pointer-events-none" />
 
-                      <div className="flex justify-between items-center font-mono text-[11px] text-[#111111] z-10 border-b border-[#111111] pb-2">
+                      <div className="flex justify-between items-center font-mono text-[11px] text-[#111111] dark:text-[#f2f1ec] z-10 border-b border-[#111111] dark:border-[#2b3038] pb-2">
                         <span className="font-bold">
-                          // SOURCE_DOCS // {selectedProject.id.toUpperCase()}
+                          &#47;&#47; SOURCE_DOCS &#47;&#47; {selectedProject.id.toUpperCase()}
                         </span>
-                        <span className="bg-[#111111] text-[#d4ff00] font-bold px-2 py-0.5 border border-[#111111]">
+                        <span className="bg-[#111111] dark:bg-[#070809] text-[#d4ff00] font-bold px-2 py-0.5 border border-[#111111] dark:border-[#2b3038]">
                           GITHUB_EVIDENCE
                         </span>
                       </div>
 
-                      <div className="my-auto text-center space-y-3 z-10 px-4">
-                        <div className="w-14 h-14 mx-auto border-2 border-[#111111] bg-[#111111] text-[#f4f3ef] flex items-center justify-center shadow-[4px_4px_0px_#0047ff]">
-                          <GitBranch className="w-7 h-7 text-[#d4ff00]" />
+                      <div className="my-auto text-center space-y-2.5 z-10 px-2">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto border-2 border-[#111111] dark:border-[#2b3038] bg-[#111111] dark:bg-[#070809] text-[#f4f3ef] flex items-center justify-center shadow-[4px_4px_0px_#0047ff]">
+                          <GitBranch className="w-6 h-6 text-[#d4ff00]" />
                         </div>
-                        <h5 className="font-black text-base text-[#111111]">
-                          مستندات، تصاویر و دمو در مخزن گیت‌هاب
+                        <h5 className="font-black text-sm sm:text-base text-[#111111] dark:text-[#f2f1ec]">
+                          {t("noVisualsHeading")}
                         </h5>
-                        <p className="text-xs font-semibold text-[#555555] max-w-[48ch] mx-auto leading-relaxed">
-                          برای مشاهده پیش‌نمایش‌های کامل، ساختار کامپوننت‌ها و
-                          جزییات پیاده‌سازی این پروژه، لطفاً به مخزن سورس‌کد در
-                          گیت‌هاب مراجعه کنید.
+                        <p className="text-xs font-semibold text-[#555555] dark:text-[#9fa4ab] max-w-[48ch] mx-auto leading-relaxed">
+                          {t("noVisualsDesc")}
                         </p>
 
-                        <div className="pt-2">
+                        <div className="pt-1.5">
                           <a
                             href={selectedProject.githubUrl}
                             target="_blank"
                             rel="noreferrer"
-                            data-cursor="interactive"
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0047ff] hover:bg-[#111111] text-[#f4f3ef] text-xs font-bold border border-[#111111] shadow-[3px_3px_0px_#111111] transition-all"
+                            className="min-h-[44px] inline-flex items-center gap-2 px-4 py-2.5 bg-[#0047ff] hover:bg-[#111111] dark:hover:bg-[#070809] text-[#f4f3ef] text-xs font-bold border border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#111111] active:translate-y-0.5 transition-all"
                           >
-                            <span>مشاهده تصاویر و مستندات در ریپازیتوری</span>
+                            <span>{t("viewRepoImages")}</span>
                             <ExternalLink className="w-3.5 h-3.5 text-[#d4ff00]" />
                           </a>
                         </div>
                       </div>
 
-                      <div className="pt-2 border-t border-[#111111] flex items-center justify-between text-[10px] font-mono text-[#555555] z-10">
+                      <div className="pt-2 border-t border-[#111111] dark:border-[#2b3038] flex items-center justify-between text-[10px] font-mono text-[#555555] dark:text-[#9fa4ab] z-10">
                         <span>REPOSITORY: {selectedProject.repoName}</span>
-                        <span className="text-[#0047ff] font-bold">
+                        <span className="text-[#0047ff] dark:text-[#d4ff00] font-bold">
                           VERIFIED_SOURCE_CODE
                         </span>
                       </div>
@@ -671,15 +612,14 @@ export function CaseStudiesSection() {
               )}
 
               {/* Footer Links */}
-              <div className="pt-4 border-t border-[#111111] flex flex-wrap items-center justify-between gap-4 text-xs font-bold">
+              <div className="pt-4 border-t border-[#111111] dark:border-[#2b3038] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 text-xs font-bold">
                 <a
                   href={selectedProject.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  data-cursor="interactive"
-                  className="px-5 py-2.5 bg-[#111111] text-[#f4f3ef] hover:bg-[#0047ff] transition-all flex items-center gap-2 border border-[#111111] shadow-[3px_3px_0px_#111111] hover:shadow-[4px_4px_0px_#d4ff00]"
+                  className="min-h-[46px] px-5 py-2.5 bg-[#111111] dark:bg-[#1b1e22] text-[#f4f3ef] hover:bg-[#0047ff] dark:hover:bg-[#0047ff] transition-all flex items-center justify-center gap-2 border border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#111111] dark:shadow-[3px_3px_0px_#0047ff] active:translate-y-0.5"
                 >
-                  <span>مشاهده مخزن در گیت‌هاب</span>
+                  <span>{t("btnGithub")}</span>
                   <ExternalLink className="w-3.5 h-3.5 text-[#d4ff00]" />
                 </a>
 
@@ -688,10 +628,9 @@ export function CaseStudiesSection() {
                     href={selectedProject.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    data-cursor="interactive"
-                    className="px-5 py-2.5 bg-[#d4ff00] text-[#111111] hover:bg-[#0047ff] hover:text-[#f4f3ef] font-black transition-all flex items-center gap-2 border border-[#111111] shadow-[3px_3px_0px_#111111]"
+                    className="min-h-[46px] px-5 py-2.5 bg-[#d4ff00] text-[#111111] hover:bg-[#0047ff] hover:text-[#f4f3ef] font-black transition-all flex items-center justify-center gap-2 border border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#111111] dark:shadow-[3px_3px_0px_#0047ff] active:translate-y-0.5"
                   >
-                    <span>مشاهده نسخه زنده</span>
+                    <span>{t("btnLiveDemo")}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}

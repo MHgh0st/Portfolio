@@ -17,23 +17,23 @@ export function CustomBlueprintCursor() {
   const springY = useSpring(cursorY, { stiffness: 500, damping: 28 });
 
   useEffect(() => {
-    // Hide cursor on touch devices or reduced motion
-    if (window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Completely disable custom cursor on touch/mobile devices or reduced motion
+    const isTouch =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(hover: none)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+
+    if (isTouch || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
-
-    let lastX = 0;
-    let lastY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       setCoords({ x: e.clientX, y: e.clientY });
 
-      if (!isVisible) setIsVisible(true);
-
-      lastX = e.clientX;
-      lastY = e.clientY;
+      setIsVisible(true);
 
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -64,7 +64,7 @@ export function CustomBlueprintCursor() {
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isVisible, cursorX, cursorY]);
+  }, [cursorX, cursorY]);
 
   if (!isVisible) return null;
 
@@ -72,11 +72,11 @@ export function CustomBlueprintCursor() {
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden select-none">
       {/* Full-viewport CAD Hairline Crosshairs */}
       <div
-        className="absolute w-full h-[1px] bg-[#0047ff]/20 transition-transform duration-75 ease-out"
+        className="absolute w-full h-[1px] bg-[#0047ff]/25 dark:bg-[#0047ff]/35 transition-transform duration-75 ease-out"
         style={{ top: `${coords.y}px` }}
       />
       <div
-        className="absolute h-full w-[1px] bg-[#0047ff]/20 transition-transform duration-75 ease-out"
+        className="absolute h-full w-[1px] bg-[#0047ff]/25 dark:bg-[#0047ff]/35 transition-transform duration-75 ease-out"
         style={{ left: `${coords.x}px` }}
       />
 
@@ -101,8 +101,8 @@ export function CustomBlueprintCursor() {
               hoverState === "project"
                 ? "w-16 h-16 border-2 border-[#ff3b00] bg-[#ff3b00]/15"
                 : hoverState === "interactive"
-                ? "w-10 h-10 border-2 border-[#0047ff] bg-[#d4ff00]/40"
-                : "w-6 h-6 border border-[#111111]/60"
+                ? "w-10 h-10 border-2 border-[#0047ff] bg-[#d4ff00]/40 dark:bg-[#0047ff]/30"
+                : "w-6 h-6 border border-[#111111]/60 dark:border-[#f2f1ec]/60"
             }`}
           >
             {/* Inner Center Dot */}
@@ -111,8 +111,8 @@ export function CustomBlueprintCursor() {
                 hoverState === "project"
                   ? "bg-[#ff3b00]"
                   : hoverState === "interactive"
-                  ? "bg-[#0047ff]"
-                  : "bg-[#111111]"
+                  ? "bg-[#0047ff] dark:bg-[#d4ff00]"
+                  : "bg-[#111111] dark:bg-[#f2f1ec]"
               }`}
             />
           </div>
@@ -122,7 +122,7 @@ export function CustomBlueprintCursor() {
             <motion.span
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#111111] text-[#d4ff00] text-[9px] font-mono px-1.5 py-0.5 border border-[#111111]"
+              className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#111111] dark:bg-[#0047ff] text-[#d4ff00] dark:text-[#ffffff] text-[9px] font-mono px-1.5 py-0.5 border border-[#111111] dark:border-[#2b3038]"
             >
               {targetLabel}
             </motion.span>
@@ -130,7 +130,7 @@ export function CustomBlueprintCursor() {
 
           {/* Coordinate Readout Badge */}
           {hoverState === "default" && (
-            <span className="absolute -bottom-5 left-4 text-[9px] font-mono text-[#555555] bg-[#f4f3ef] px-1 border border-[#111111]/30">
+            <span className="absolute -bottom-5 left-4 text-[9px] font-mono text-[#555555] dark:text-[#9fa4ab] bg-[#f4f3ef] dark:bg-[#141618] px-1 border border-[#111111]/30 dark:border-[#2b3038]">
               {coords.x},{coords.y}
             </span>
           )}
