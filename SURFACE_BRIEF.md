@@ -34,7 +34,7 @@ Experience (the visitor is inside the work itself; let the artifact lead from th
 
 - Real Projects from GitHub (`MHgh0st`):
 
-  1. **GraphNext:** Data & Node Graph Visualization System (Next.js 16, React 19, @xyflow/react, D3 Sankey, elkjs, Apache Arrow, HeroUI).
+  1. **ProcessPulse:** Process Mining & Node Graph Visualization System (Next.js 16, React 19, @xyflow/react, D3 Sankey, elkjs, Rust Polars, ConnectorX, FastAPI).
 
   2. **ASCVD Updates:** Medical ACC/AHA 10-Year Clinical Risk Engine (Next.js 15, React 19, Supabase PostgreSQL, Prisma ORM, NextAuth SMS, React Gauge).
 

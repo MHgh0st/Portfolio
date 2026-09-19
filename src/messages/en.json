@@ -56,7 +56,7 @@
       "projects": "PROJECTS",
       "projectsSub": "Repositories & source code",
       "caseStudies": "CASE STUDIES",
-      "caseStudiesSub": "Salma & GraphNext deep-dives",
+      "caseStudiesSub": "Salma & ProcessPulse deep-dives",
       "whatIDo": "ENGINEERING",
       "whatIDoSub": "Pillars & verified evidence",
       "aboutPhilosophy": "PHILOSOPHY",
@@ -112,17 +112,17 @@
     "btnLiveDemo": "EXPLORE LIVE DEMO",
     "projects": {
       "graphnext": {
-        "name": "Samaneh Fekr // High-Scale Graph & Data Visualization",
+        "name": "ProcessPulse — Enterprise Process Mining & Graph Telemetry",
         "category": "Process Mining, Vector Graphs & Visual Engine",
-        "tagline": "Real-time process graph engine and data streaming pipeline with binary deserialization and locked 60FPS UI performance.",
-        "overview": "Samaneh Fekr is a production full-stack analytics platform engineered for process mining, enterprise network analysis, and rendering massive node graphs. The backend leverages Python, FastAPI, Polars, and PostgreSQL for instantaneous DFG matrix extraction, while the Next.js 16 frontend integrates Apache Arrow, MsgPack, and off-thread Web Worker layout computations to achieve stutter-free 60FPS visualization.",
-        "architectureDetails": "Fully containerized full-stack architecture with Docker Compose: Python 3 (FastAPI) backend powered by Polars, ConnectorX, and PyArrow over PostgreSQL. Next.js 16 (App Router) and React 19 frontend integrating elkjs auto-layout inside Web Workers, @xyflow/react node canvas, D3-Sankey process flow diagrams, and isolated Zustand telemetry stores.",
+        "tagline": "Real-time process mining engine and data streaming pipeline with binary deserialization and locked 60FPS UI performance.",
+        "overview": "ProcessPulse is an enterprise-grade full-stack process intelligence platform engineered for process mining, bottleneck telemetry, and interactive graph exploration across 1.2M+ event logs (IEEE BPI Challenge 2017 benchmark). The backend leverages Python, FastAPI, Rust Polars, and PostgreSQL for instantaneous DFG matrix extraction (0.33s), while the Next.js 16 frontend integrates Apache Arrow, MsgPack, and off-thread Web Worker layout computations to achieve stutter-free 60FPS visualization.",
+        "architectureDetails": "Fully containerized full-stack architecture with Docker Compose: Python 3 (FastAPI) backend powered by Polars, ConnectorX, and PyArrow over PostgreSQL 15 with 8 B-Tree indexes. Next.js 16 (App Router) and React 19 frontend integrating elkjs auto-layout inside Web Workers, @xyflow/react node canvas, D3-Sankey process flow diagrams, and isolated Zustand telemetry stores.",
         "keyHighlights": [
-          "Developed high-throughput Python backend pipelines with FastAPI & Polars for instant DFG graph and variant path extraction",
-          "Engineered parallel off-thread ELK graph layout calculations in Web Workers, guaranteeing zero UI frame drops",
+          "Developed high-throughput Python backend pipelines with FastAPI & Rust Polars for instant DFG graph and variant path extraction across 1.2M+ events in 0.33s",
+          "Engineered parallel off-thread ELK graph layout calculations in Web Workers, guaranteeing zero UI frame drops at locked 60+ FPS",
           "Implemented client-server binary data streaming using Apache Arrow, MsgPack, and Zstandard compression",
-          "Visualized enterprise process flows and throughput bottlenecks with custom D3-Sankey diagrams",
-          "Architected comprehensive Docker Compose infrastructure spanning Frontend, Backend, and PostgreSQL services"
+          "Visualized enterprise process flows and throughput bottlenecks with custom D3-Sankey diagrams and interactive Obsidian dark mode tooltips",
+          "Architected comprehensive Docker Compose infrastructure spanning Frontend, Backend, and PostgreSQL with 8 targeted B-Tree indexes"
         ],
         "visualPlaceholderSubtitle": "Interactive node graph canvas, D3-Sankey flow diagrams, and process analytics charts"
       },
@@ -285,9 +285,9 @@
   },
   "GraphNextCaseStudy": {
     "eyebrow": "[FEATURED CASE STUDY 02 // MASSIVE GRAPH ENGINE]",
-    "heading": "Samaneh Fekr // High-Scale Graph & Data Flow Visualization",
-    "heroTitle": "Full-Stack Architecture of Samaneh Fekr // Process Mining & Graph Analytics Engine",
-    "heroParagraph": "Samaneh Fekr is a full-stack production platform for process mining and large-scale graph analysis; featuring a high-throughput backend pipeline built on FastAPI, Polars, PyArrow, and PostgreSQL paired with off-thread Web Worker layout rendering and interactive D3-Sankey flows in Next.js 16.",
+    "heading": "ProcessPulse — Enterprise Process Mining & Graph Telemetry",
+    "heroTitle": "Full-Stack Architecture of ProcessPulse — Process Mining & Graph Analytics Engine",
+    "heroParagraph": "ProcessPulse is an enterprise full-stack platform for process mining and large-scale graph analysis; featuring a high-throughput backend pipeline built on FastAPI, Rust Polars, ConnectorX, and PostgreSQL paired with off-thread Web Worker layout rendering and interactive D3-Sankey flows in Next.js 16.",
     "specs": {
       "frontend": "FRONTEND:",
       "backend": "BACKEND & API:",
@@ -300,14 +300,14 @@
         "title": "Scope & Mission",
         "englishTitle": "OVERVIEW & PURPOSE",
         "subTitle": "Large-Scale Structured Data Visualization & Process Analysis",
-        "text": "Samaneh Fekr is engineered for real-time processing and interactive exploration of massive enterprise transaction networks. It empowers data analysts to inspect complex node topologies, D3-Sankey flow diagrams, edge duration histograms, and case distribution metrics at a steady 60 frames per second.",
+        "text": "ProcessPulse is engineered for real-time processing and interactive exploration of massive enterprise transaction networks across 1,202,267 event logs (BPI Challenge 2017). It empowers data analysts to inspect complex node topologies, D3-Sankey flow diagrams, edge duration histograms, and case distribution metrics at a steady 60 frames per second.",
         "boxes": {
           "role": "TECHNICAL ROLE:",
           "roleVal": "Full-Stack Systems Architect (Frontend & Backend)",
           "domain": "DOMAIN EXPERTISE:",
           "domainVal": "Process Mining & Graph Analytics",
           "stack": "CORE STACK:",
-          "stackVal": "FastAPI + Polars + Next.js 16 + PostgreSQL"
+          "stackVal": "FastAPI + Rust Polars + Next.js 16 + PostgreSQL"
         }
       },
       "challenge": {
@@ -316,7 +316,7 @@
         "englishTitle": "BIG DATA CHALLENGES",
         "subTitle": "Backend Graph Computation & Frontend Render Bottlenecks",
         "points": [
-          "1. Heavy Backend Graph Computation (DFG Generation): Extracting Directly Follows Graphs (DFG), recurring variant paths, duration bottlenecks, and transition matrices across millions of database logs in Python led to severe slowdowns with standard Pandas. This was resolved using the multi-threaded Polars columnar engine.",
+          "1. Heavy Backend Graph Computation (DFG Generation): Extracting Directly Follows Graphs (DFG), recurring variant paths, duration bottlenecks, and transition matrices across 1.2M+ database logs in Python led to severe slowdowns with standard Pandas. This was resolved using the multi-threaded Polars columnar engine in Rust.",
           "2. Network Transfer & JSON Serialization Bottleneck: Transmitting massive graph matrices as text JSON congested bandwidth and locked the main thread. Implementing Apache Arrow binary streaming, MsgPack serialization, and Zstandard compression reduced payload sizes by over 90%.",
           "3. Stutter-Free Graph Auto-Layout: Calculating 2D coordinates for hundreds of interconnected nodes via ELK.js was offloaded to background Web Workers, preventing any frame loss on the browser UI thread."
         ]
@@ -341,7 +341,7 @@
         "englishTitle": "VISUALS & DEMO",
         "subTitle": "Interactive Graph Canvas & Visual Showcase",
         "zoomHint": "VIEW FULL RESOLUTION",
-        "imgAlt": "Samaneh Fekr System Preview - Screenshot",
+        "imgAlt": "ProcessPulse System Preview - Screenshot",
         "placeholderBadge": "MEDIA ASSET CONTAINER",
         "placeholderDesc": "High-resolution screenshots, video demos, and visual walkthroughs of the interactive graph engine and SankeyFlow diagram."
       },
@@ -399,26 +399,26 @@
         "title": "Massive Data & Interactive Graph Engines",
         "englishTitle": "HIGH-PERFORMANCE GRAPH & DATA VISUALIZATION",
         "statement": "Sub-16ms rendering architecture for multi-thousand node graphs with zero frame drops via parallel Web Worker pipelines.",
-        "manifesto": "In analytical platforms like Samaneh Fekr (GraphNext) and Graph, the primary challenge is keeping the main UI thread unblocked. By delegating complex geometric layouts to Web Workers via ELK.js, utilizing Apache Arrow binary streaming, fzstd decompression, and D3-Sankey diagrams, massive datasets render at locked 60FPS.",
+        "manifesto": "In analytical platforms like ProcessPulse and Graph, the primary challenge is keeping the main UI thread unblocked. By delegating complex geometric layouts to Web Workers via ELK.js, utilizing Apache Arrow binary streaming, fzstd decompression, and D3-Sankey diagrams, massive datasets render at locked 60FPS.",
         "evidenceStack": [
           "Interactive node canvases and Sankey streams with xyflow/react, D3.js, and ApexCharts",
           "Off-thread algorithmic graph auto-layout powered by Web Workers and ELK.js",
           "Columnar data streaming and serialization using Apache Arrow, MsgPack, and Zstandard"
         ],
-        "repos": "Samaneh Fekr (GraphNext), Graph"
+        "repos": "ProcessPulse (Frontend & Backend), Graph"
       },
       "fullstack-data-engineering": {
         "number": "02",
         "title": "Full-Stack & High-Speed Data Pipelines",
         "englishTitle": "FULL-STACK & HIGH-SPEED DATA PIPELINES",
         "statement": "High-throughput endpoints with Python and Polars, robust PostgreSQL modeling, and Docker infrastructure.",
-        "manifesto": "My craft extends well below the presentation tier. In Samaneh Fekr and backend services, I architect data pipelines using Python (FastAPI) and the high-speed Polars engine rather than traditional Pandas, extracting graph matrices, process logs, and database queries with minimal latency and memory footprint.",
+        "manifesto": "My craft extends well below the presentation tier. In ProcessPulse and backend microservices, I architect data pipelines using Python (FastAPI) and the high-speed Polars engine rather than traditional Pandas, extracting graph matrices, process logs, and database queries with minimal latency and memory footprint.",
         "evidenceStack": [
           "Data processing microservices and DFG matrix generation with FastAPI and multi-threaded Polars",
           "High-efficiency PostgreSQL integration with high-speed ConnectorX and PyArrow drivers",
           "Comprehensive multi-service orchestration with Docker Compose"
         ],
-        "repos": "Samaneh Fekr (BackEnd), nextjsRepositoryPattern"
+        "repos": "ProcessPulse-backend, nextjsRepositoryPattern"
       },
       "cross-platform-native": {
         "number": "03",

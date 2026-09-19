@@ -41,7 +41,7 @@
 
 | پروژه                                      | دسته‌بندی                       | پشته اصلی                                                                                             |
 | :----------------------------------------- | :------------------------------ | :---------------------------------------------------------------------------------------------------- |
-| **سامانه فکر (GraphNext)**                 | مصورسازی و تحلیل داده‌های حجیم  | Next.js 16, React 19, @xyflow/react, D3-Sankey, Apache Arrow, MsgPack, Python FastAPI, Polars, Docker |
+| **ProcessPulse**                           | کاوش فرآیند و تحلیل داده‌های حجیم  | Next.js 16, React 19, @xyflow/react, D3-Sankey, Rust Polars, ConnectorX, FastAPI, PostgreSQL, Docker |
 | **محاسبه‌گر بالینی ASCVD**                 | سلامت دیجیتال و محاسبات رگرسیون | Next.js 15, React 19, Supabase, Prisma ORM, NextAuth.js, Tailwind v4                                  |
 | **پنل مدیریت سلامت سلما (Salma Admin)**    | دشبورد سازمانی و ساختار پلن     | Next.js 16, React 19, HeroUI v3, Tailwind v4, Zustand, Solar Icons                                    |
 | **اپلیکیشن نیتیو موبایل سلما (Salma App)** | موبایل کراس‌پلتفرم نیتیو        | React Native 0.86, Expo SDK 57, Shopify Skia, Reanimated 4, Uniwind, Gorhom Bottom-Sheet              |

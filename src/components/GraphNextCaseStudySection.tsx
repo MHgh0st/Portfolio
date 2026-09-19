@@ -37,12 +37,12 @@ export function GraphNextCaseStudySection() {
   const [activeChapterId, setActiveChapterId] = useState<ChapterKey>("overview");
   const [isMobile, setIsMobile] = useState(false);
   const [images] = useState<string[]>([
-    "/Projects/GraphNext/1.png",
-    "/Projects/GraphNext/2.png",
-    "/Projects/GraphNext/3.png",
-    "/Projects/GraphNext/4.png",
-    "/Projects/GraphNext/5.png",
-    "/Projects/GraphNext/6.png",
+    "/Projects/ProcessPulse/1.png",
+    "/Projects/ProcessPulse/2.png",
+    "/Projects/ProcessPulse/3.png",
+    "/Projects/ProcessPulse/4.png",
+    "/Projects/ProcessPulse/5.png",
+    "/Projects/ProcessPulse/6.png",
   ]);
 
   useEffect(() => {
@@ -103,11 +103,11 @@ export function GraphNextCaseStudySection() {
             </h2>
           </div>
           <div className="font-mono text-xs text-[#555555] dark:text-[#9fa4ab]">
-            SAMANEH FEKR &#47;&#47; CASE_STUDY_02
+            PROCESSPULSE — CASE_STUDY_02
           </div>
         </motion.div>
 
-        {/* Hero Banner for GraphNext */}
+        {/* Hero Banner for ProcessPulse */}
         <motion.div
           style={{ scale: heroCardScale }}
           className="mb-8 sm:mb-12 bg-[#111111] dark:bg-[#070809] text-[#f4f3ef] border-2 border-[#111111] dark:border-[#2b3038] p-5 sm:p-8 lg:p-10 shadow-[6px_6px_0px_#0047ff] sm:shadow-[8px_8px_0px_#0047ff] relative overflow-hidden origin-center"
@@ -118,7 +118,7 @@ export function GraphNextCaseStudySection() {
             <div className="lg:col-span-8 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0047ff] text-[#d4ff00] text-xs font-mono font-bold border border-[#111111] dark:border-[#2b3038]">
                 <Terminal className="w-3.5 h-3.5" />
-                <span>SAMANEH_FEKR &#47;&#47; HIGH_PERFORMANCE_VISUALIZATION</span>
+                <span>PROCESSPULSE: HIGH_PERFORMANCE_VISUALIZATION</span>
               </div>
 
               <h3 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight text-[#f4f3ef]">
@@ -135,25 +135,25 @@ export function GraphNextCaseStudySection() {
               <div className="flex justify-between items-center border-b border-[#111111] dark:border-[#2b3038] pb-1.5 gap-2">
                 <span className="text-[#555555] dark:text-[#9fa4ab] shrink-0">{t("specs.frontend")}</span>
                 <span className="font-bold text-[#0047ff] dark:text-[#d4ff00]">
-                  Next.js 16 + XYFlow
+                  Next.js 16 + React 19 + XYFlow
                 </span>
               </div>
               <div className="flex justify-between items-center border-b border-[#111111] dark:border-[#2b3038] pb-1.5 gap-2">
                 <span className="text-[#555555] dark:text-[#9fa4ab] shrink-0">{t("specs.backend")}</span>
                 <span className="font-bold text-[#111111] dark:text-[#f2f1ec]">
-                  Python (FastAPI + Polars)
+                  Python (FastAPI + Rust Polars)
                 </span>
               </div>
               <div className="flex justify-between items-center border-b border-[#111111] dark:border-[#2b3038] pb-1.5 gap-2">
                 <span className="text-[#555555] dark:text-[#9fa4ab] shrink-0">{t("specs.database")}</span>
                 <span className="font-bold text-[#111111] dark:text-[#f2f1ec]">
-                  PostgreSQL + Docker
+                  PostgreSQL 15 (8 B-Trees)
                 </span>
               </div>
               <div className="flex justify-between items-center gap-2">
                 <span className="text-[#555555] dark:text-[#9fa4ab] shrink-0">{t("specs.dataTransfer")}</span>
                 <span className="font-bold text-[#ff3b00]">
-                  Arrow + MsgPack + Zstd
+                  BPI 2017 / Arrow + MsgPack
                 </span>
               </div>
             </div>
@@ -330,7 +330,7 @@ export function GraphNextCaseStudySection() {
                       onClick={() =>
                         openImage({
                           src: imgSrc,
-                          title: `SAMANEH_FEKR &#47;&#47; VISUAL_0${idx + 1}`,
+                          title: `ProcessPulse — Screenshot 0${idx + 1}`,
                           alt: `${t("chapters.visuals.imgAlt")} ${idx + 1}`,
                         })
                       }
@@ -358,7 +358,7 @@ export function GraphNextCaseStudySection() {
 
                   <div className="flex justify-between items-center font-mono text-[11px] text-[#111111] dark:text-[#f2f1ec] z-10 border-b border-[#111111] dark:border-[#2b3038] pb-2">
                     <span className="font-bold">
-                      &#47;&#47; VISUAL_CANVAS &#47;&#47; GRAPHNEXT_DEMO
+                      VISUAL CANVAS: PROCESSPULSE DEMO
                     </span>
                     <span className="bg-[#d4ff00] text-[#111111] font-bold px-2 py-0.5 border border-[#111111] dark:border-[#2b3038]">
                       {t("chapters.visuals.placeholderBadge")}
@@ -370,7 +370,7 @@ export function GraphNextCaseStudySection() {
                       <ImageIcon className="w-6 h-6 sm:w-8 sm:h-8 text-[#d4ff00]" />
                     </div>
                     <h5 className="font-black text-sm sm:text-base text-[#111111] dark:text-[#f2f1ec]">
-                      GRAPHNEXT INTERACTIVE DEMO CANVAS
+                      PROCESSPULSE INTERACTIVE DEMO CANVAS
                     </h5>
                     <p className="text-xs font-medium text-[#555555] dark:text-[#9fa4ab] max-w-[40ch] mx-auto">
                       {t("chapters.visuals.placeholderDesc")}

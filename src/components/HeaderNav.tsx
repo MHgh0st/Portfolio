@@ -6,8 +6,6 @@ import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import {
   ArrowDownLeft,
   ArrowDownRight,
-  Clock,
-  MapPin,
   Menu,
   X,
   Layers,
@@ -28,7 +26,6 @@ export function HeaderNav() {
   const locale = useLocale();
   const isRtl = locale === "fa";
 
-  const [timeStr, setTimeStr] = useState<string>("");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted] = useState(true);
@@ -48,21 +45,6 @@ export function HeaderNav() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTimeStr(
-        now.toLocaleTimeString(isRtl ? "fa-IR" : "en-US", {
-          hour12: false,
-          timeZone: "Asia/Tehran",
-        })
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, [isRtl]);
 
   // Close mobile drawer on Escape key or resize > md
   useEffect(() => {
@@ -147,41 +129,6 @@ export function HeaderNav() {
             </span>
           </motion.a>
 
-          {/* Center: Live Time & Availability Indicator (Desktop & Tablet) */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="hidden lg:flex items-center gap-3 text-xs text-[#555555] dark:text-[#9fa4ab]"
-          >
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#0047ff] dark:text-[#d4ff00]" />
-              <span>{t("locationLabel")}</span>
-            </span>
-
-            <span className="text-[#cccccc] dark:text-[#323740]">|</span>
-
-            {/* Live Digital Clock with Monospace Precision */}
-            <div className="flex items-center gap-1.5 bg-[#e9e7e1] dark:bg-[#1b1e22] px-2 py-0.5 border border-[#111111]/30 dark:border-[#2b3038]">
-              <Clock className="w-3.5 h-3.5 text-[#0047ff] dark:text-[#d4ff00]" />
-              <span className="text-[11px] text-[#555555] dark:text-[#9fa4ab]">{t("timeLabel")}</span>
-              <span className="text-[#111111] dark:text-[#f2f1ec] font-bold font-mono text-xs tracking-wider">
-                {timeStr || (isRtl ? "۱۲:۰۰:۰۰" : "12:00:00")}
-              </span>
-            </div>
-
-            <span className="text-[#cccccc] dark:text-[#323740]">|</span>
-
-            {/* Availability Status Badge with Pulsing Ping */}
-            <div className="inline-flex items-center gap-2 bg-[#d4ff00]/40 dark:bg-[#0047ff]/25 px-2.5 py-0.5 border border-[#111111] dark:border-[#2b3038] shadow-[2px_2px_0px_#111111] dark:shadow-[2px_2px_0px_#0047ff]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-              </span>
-              <span className="text-[#111111] dark:text-[#f2f1ec] font-bold text-[11px]">{t("statusBadge")}</span>
-            </div>
-          </motion.div>
-
           {/* End: Navigation Links, Language Switcher, Theme Toggle, CTA & Mobile Menu Toggle */}
           <div className="flex items-center gap-2 sm:gap-2.5">
             {/* Desktop Nav Items */}
@@ -189,7 +136,7 @@ export function HeaderNav() {
               initial={{ opacity: 0, x: isRtl ? -20 : 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="hidden md:flex items-center gap-1 sm:gap-1.5 font-bold text-xs"
+              className="hidden md:flex items-center gap-1 lg:gap-2 font-bold text-xs"
             >
               {navLinks.map((item, idx) => (
                 <motion.a
@@ -204,13 +151,9 @@ export function HeaderNav() {
                 </motion.a>
               ))}
 
-              {/* Desktop Language Switcher */}
-              <div className="ms-1 me-1">
+              {/* Utility Pod: Language Switcher & Theme Toggle */}
+              <div className="flex items-center gap-1.5 ms-2 ps-2 border-s border-[#111111]/20 dark:border-[#2b3038]">
                 <LanguageSwitcher variant="desktop" />
-              </div>
-
-              {/* Desktop Theme Toggle */}
-              <div className="me-1">
                 <ThemeToggle variant="desktop" />
               </div>
 
@@ -220,7 +163,7 @@ export function HeaderNav() {
                 whileHover={{ y: -2, scale: 1.03 }}
                 whileTap={{ y: 1, scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                className="min-h-[38px] bg-[#111111] dark:bg-[#0047ff] text-[#f4f3ef] hover:bg-[#0047ff] dark:hover:bg-[#111111] px-3.5 py-2 transition-colors flex items-center gap-1.5 border border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#0047ff] dark:shadow-[3px_3px_0px_#d4ff00] hover:shadow-[4px_4px_0px_#111111] cursor-pointer whitespace-nowrap"
+                className="min-h-[38px] bg-[#111111] dark:bg-[#0047ff] text-[#f4f3ef] hover:bg-[#0047ff] dark:hover:bg-[#111111] px-3.5 py-2 transition-colors flex items-center gap-1.5 border border-[#111111] dark:border-[#2b3038] shadow-[3px_3px_0px_#0047ff] dark:shadow-[3px_3px_0px_#d4ff00] hover:shadow-[4px_4px_0px_#111111] cursor-pointer whitespace-nowrap ms-1.5"
               >
                 <span>{t("contactCta")}</span>
                 <ArrowActionIcon className="w-3.5 h-3.5 text-[#d4ff00]" />

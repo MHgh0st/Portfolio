@@ -16,7 +16,7 @@ Recruiters, Engineering Managers, Frontend Leads, and CTOs evaluating senior fro
 
 ## Product Purpose
 
-A senior frontend engineer portfolio for Mohammad Hossein Gholami (`MHgh0st`) designed to present advanced web architecture, complex interactive systems (GraphNext, ASCVD, Ticketing System), and exceptional visual craft.
+A senior frontend engineer portfolio for Mohammad Hossein Gholami (`MHgh0st`) designed to present advanced web architecture, complex interactive systems (ProcessPulse, ASCVD, Ticketing System), and exceptional visual craft.
 
 ## Positioning
 
@@ -30,7 +30,7 @@ Evaluated on desktop and mobile web browsers during high-velocity candidate filt
 
 - Responsive web interface (desktop & mobile)
 - Asymmetric grid-driven layouts
-- Real project integrations (GraphNext, ASCVD, Ticketing System)
+- Real project integrations (ProcessPulse, ASCVD, Ticketing System)
 - Interactive frontend performance & architectural breakdowns
 - Clean TypeScript codebase
 
@@ -45,7 +45,7 @@ Evaluated on desktop and mobile web browsers during high-velocity candidate filt
 ## Evidence on Hand
 
 - Real projects from GitHub (`MHgh0st`):
-  - **GraphNext:** Advanced graph & large data visualization engine built with Next.js 16, React 19, `@xyflow/react`, `elkjs`, D3 (d3-sankey), ApexCharts, Apache Arrow, msgpack, and HeroUI.
+  - **ProcessPulse:** Advanced process mining & large data visualization engine built with Next.js 16, React 19, `@xyflow/react`, `elkjs`, D3 (d3-sankey), Rust Polars, ConnectorX, FastAPI, and PostgreSQL.
   - **ASCVD:** Medical cardiovascular 10-year risk calculator app built with Next.js 15, React 19, Supabase (PostgreSQL), Prisma ORM, NextAuth.js (SMS/bcrypt), React Gauge, and HeroUI.
   - **ticketing-system:** Enterprise ticketing platform built with Vue.js 3, Nuxt.js, Tailwind CSS, featuring 100% custom UI components (Chat Bubbles, Drawers, Modals) and SMS/Username authentication.
 
